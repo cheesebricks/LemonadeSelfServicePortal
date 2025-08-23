@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Self‑Service Content Generator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Self‑Service Content Generator</h1>
+    <label for="use-case">Select use case:</label>
+    <select id="use-case">
+      <option value="">-- Choose a use case --</option>
+      <option value="pr">Pull Request Description</option>
+      <option value="microcopy">Microcopy</option>
+      <option value="blogpost">Blog Post</option>
+    </select>
+    <div id="param-fields"></div>
+    <button id="submit-btn">Generate</button>
+    <div id="result" class="result"></div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
