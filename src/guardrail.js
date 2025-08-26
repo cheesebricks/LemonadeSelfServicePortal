@@ -121,7 +121,7 @@ async function criticScore(text, contentType, params = {}) {
     if (uiContext === 'button') {
       rubric = `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`;
     } else if (uiContext === 'error') {
-      rubric = `Evaluate empathy, helpfulness, clarity (1 sentence max), and absence of technical jargon.`;
+      rubric = `Evaluate clarity and helpfulness. Error messages should be clear, empathetic, and helpful (1 sentence max). Score 30-40 if the text clearly explains the issue and is user-friendly, even if it uses some technical terms. Be lenient.`;
     } else if (uiContext === 'tooltip') {
       rubric = `Evaluate helpfulness and informativeness. Tooltips should be 1-2 sentences that explain the purpose or benefit. Score 30-40 if the text is helpful and informative, even if it could be slightly more concise. Be very lenient.`;
     } else {
