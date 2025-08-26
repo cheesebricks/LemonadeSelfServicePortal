@@ -38,11 +38,11 @@ export function renderForm(type){
 
   if (type === 'internal_comms') {
     form.append(
+      rowInput('Title', 'title', 'Short subject', true),
+      rowTextarea('Key update', 'keyUpdate', 'What\'s changing?', true),
       rowSelect('Channel', 'channel', [
         {v:'Slack', l:'Slack'}, {v:'Email', l:'Email'}
-      ], true),
-      rowInput('Title', 'title', 'Short subject', true),
-      rowTextarea('Key update', 'keyUpdate', 'What’s changing?', true)
+      ], true)
     );
   }
 }
