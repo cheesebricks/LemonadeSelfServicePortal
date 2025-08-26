@@ -63,8 +63,8 @@ export function getPolicy(contentType) {
     return {
       ...base,
       typeName: "PR / External",
-      required: ["headline", "key_message", "audience", "region", "locale"],
-      corpus: { matchOn: ["region", "audience", "locale"], refs: 3 },
+      required: ["headline", "key_message", "audience", "locale"],
+      corpus: { matchOn: ["audience", "locale"], refs: 3 },
       traits: { witty: 0.2, empathetic: 0.5, clear: 1 },
       prefer: ["transparent pricing", "customers", "community"],
       // PR: avoid consumer CTAs
@@ -103,6 +103,13 @@ export function getTraits(type, params = {}) {
   // Tweak for Internal Comms: All-hands → less witty, more empathetic
   if (type === "internal_comms" && typeof params.audience === "string" && /all-?hands/i.test(params.audience)) {
     return { witty: 0.2, empathetic: 0.8, clear: 1 };
+  }
+  // Tailor PR / External tone by audience
+  if (type === "press_release") {
+    const aud = String(params.audience || '').toLowerCase();
+    if (aud === 'press') return { witty: 0.2, empathetic: 0.5, clear: 1 };
+    if (aud === 'customers') return { witty: 0.3, empathetic: 0.6, clear: 1 };
+    if (aud === 'investors') return { witty: 0.1, empathetic: 0.3, clear: 1 };
   }
   return p.traits;
 }

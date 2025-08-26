@@ -28,9 +28,10 @@ export function renderForm(type){
     form.append(
       rowInput('Headline', 'headline', 'Short headline', true),
       rowInput('Key message', 'keyMessage', 'What’s the gist?', true),
-      rowInput('Audience', 'audience', 'press, customers', true),
-      rowSelect('Region', 'region', [
-        {v:'US', l:'US'}, {v:'EU', l:'EU'}, {v:'UK', l:'UK'}
+      rowSelect('Audience', 'audience', [
+        {v:'press', l:'press'},
+        {v:'customers', l:'customers'},
+        {v:'investors', l:'investors'}
       ], true)
     );
   }
@@ -61,7 +62,7 @@ export function validate(type){
     return !!(p.uiContext && p.intent);
   }
   if (type === 'press_release') {
-    return !!(p.headline && p.keyMessage && p.audience && p.region);
+    return !!(p.headline && p.keyMessage && p.audience);
   }
   if (type === 'internal_comms') {
     return !!(p.channel && p.title && p.keyUpdate && p.audience);

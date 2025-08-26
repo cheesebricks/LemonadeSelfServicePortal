@@ -135,7 +135,6 @@ function baseNormalize(type, p = {}) {
   const out = { ...p };
   if (type !== 'microcopy' && !out.locale) out.locale = 'en-US';
   if (type === 'press_release') {
-    if (!out.region) out.region = 'US';
     if (!out.audience) out.audience = 'press';
     if (!out.section) out.section = 'body';
     if (!out.topic && out.headline) out.topic = out.headline;

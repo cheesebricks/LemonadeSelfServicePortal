@@ -77,8 +77,7 @@ OUTPUT: Only the final text.`;
   if (type === 'press_release') {
     const task =
 `TASK: Press Release paragraph (lede/body).
-AUDIENCE: press
-REGION: ${params?.region || 'US'}
+AUDIENCE: ${params?.audience || 'press'}
 HEADLINE: ${params?.headline || ''}
 KEY MESSAGE: ${params?.key_message || ''}
 ${refsBlock(refs)}
