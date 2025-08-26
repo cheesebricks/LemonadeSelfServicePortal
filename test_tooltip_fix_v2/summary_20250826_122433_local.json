@@ -1,0 +1,18 @@
+{
+  "created_at": "2025-08-26T12:24:34Z",
+  "total_runs": 3,
+  "pass": 0,
+  "borderline": 2,
+  "fail": 1,
+  "by_type": {
+    "microcopy": {
+      "count": 3,
+      "pass": 0,
+      "borderline": 2,
+      "fail": 1
+    }
+  },
+  "avg_trs": 71.67,
+  "avg_duration_ms": 6402,
+  "429s": 0
+}

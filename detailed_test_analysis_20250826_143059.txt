@@ -1,0 +1,681 @@
+DETAILED TEST RESULTS ANALYSIS
+================================================================================
+Generated: 2025-08-26 14:30:59
+Total Cases: 20
+================================================================================
+
+SUMMARY STATISTICS
+----------------------------------------
+Overall Success Rate: 20/20 (100.0%)
+Average TRS Score: 87.40
+
+MICROCOPY:
+  Cases: 20
+  Success: 20/20 (100.0%)
+  Avg TRS: 87.40
+
+================================================================================
+
+DETAILED CASE ANALYSIS
+================================================================================
+
+================================================================================
+TEST CASE #1
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "pay now"
+}
+Duration: 1653ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Pay Now
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #2
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "timeout_error"
+}
+Duration: 1765ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_timeout_1 — Request timed out. Retry
+  • err_timeout_topup_1 — That took too long. Retry
+  • err_rate_limited_1 — Too many attempts. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+That took too long. Please
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #3
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "submit"
+}
+Duration: 1758ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_submit_1 — Submit
+  • cta_submit_topup_1 — Submit
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Next
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #4
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "resend_code"
+}
+Duration: 1795ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_resend_code_1 — Resend code
+  • cta_resend_code_2 — Resend Code
+  • cta_resend_code_topup_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Resend Code
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #5
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "server offline"
+}
+Duration: 2002ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+  • err_timeout_1 — Request timed out. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Our servers are currently offline
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #6
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "why we need this info"
+}
+Duration: 1611ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+why we need your phone
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #7
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "password rules"
+}
+Duration: 1616ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Use at least 12 characters
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #8
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "rate_limited"
+}
+Duration: 1657ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_rate_limited_topup_1 — You’re sending too many requests. Wait & retry
+  • err_server_offline_1 — Our servers are offline. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Too many attempts. Try again
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #9
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "server error"
+}
+Duration: 1610ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+  • err_timeout_1 — Request timed out. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Server error. We're experiencing technical
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #10
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "confirm details"
+}
+Duration: 1619ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_confirm_1 — Confirm details
+  • cta_verify_code_1 — Verify code
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Next, Confirm
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 36/40
+Lexicon: 20/20
+Critic: 32/40
+
+================================================================================
+TEST CASE #11
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "save"
+}
+Duration: 1609ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_save_1 — Save
+  • cta_save_changes_topup_1 — Save changes
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Save
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #12
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "dns_error"
+}
+Duration: 1622ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_dns_1 — Couldn’t find the server. Retry
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+We couldn't find the DNS
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #13
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "upload file"
+}
+Duration: 1685ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_upload_file_1 — Upload file
+  • cta_upload_file_2 — Upload File
+  • cta_upload_file_topup_1 — Upload file
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Upload File
+
+SCORING:
+----------------------------------------
+TRS Score: 92
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 32/40
+
+================================================================================
+TEST CASE #14
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "decline"
+}
+Duration: 1619ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_decline_1 — Decline
+  • cta_decline_topup_1 — Decline
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Decline
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #15
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "back"
+}
+Duration: 1627ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_back_1 — Back
+  • cta_back_topup_1 — Back
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Back
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #16
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "maintenance_window"
+}
+Duration: 2450ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_maintenance_1 — We’re updating things right now. Retry
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Our maintenance team is working
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #17
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "agree"
+}
+Duration: 1627ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Agree Now
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #18
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "next"
+}
+Duration: 1849ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_next_1 — Next
+  • cta_next_topup_1 — Next
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Next
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #19
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "explain coverage limit"
+}
+Duration: 1618ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+ll pay for your medical
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #20
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "verify code"
+}
+Duration: 1650ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_verify_code_2 — Verify Code
+  • cta_verify_code_topup_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Verify Code
+
+SCORING:
+----------------------------------------
+TRS Score: 92
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 32/40
+

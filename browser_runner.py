@@ -90,7 +90,7 @@ def cases_strong_type():
     ]
     return microcopy, internal, pr
 
-def expand_cases(include_str, replicates):
+def expand_cases(include_str, replicates, specific_case=None):
     include = [s.strip().lower() for s in include_str.split(",") if s.strip()]
     # Synonyms
     norm = []
@@ -105,13 +105,20 @@ def expand_cases(include_str, replicates):
     all_cases = []
     if "microcopy" in include:
         for _ in range(replicates):
-            for p in mc: all_cases.append(("microcopy", p))
+            for p in mc: 
+                # If specific_case is provided, only include matching cases
+                if specific_case is None or any(specific_case.lower() in str(v).lower() for v in p.values()):
+                    all_cases.append(("microcopy", p))
     if "internal_comms" in include:
         for _ in range(replicates):
-            for p in ic: all_cases.append(("internal_comms", p))
+            for p in ic: 
+                if specific_case is None or any(specific_case.lower() in str(v).lower() for v in p.values()):
+                    all_cases.append(("internal_comms", p))
     if "press_release" in include:
         for _ in range(replicates):
-            for p in pr: all_cases.append(("press_release", p))
+            for p in pr: 
+                if specific_case is None or any(specific_case.lower() in str(v).lower() for v in p.values()):
+                    all_cases.append(("press_release", p))
 
     random.shuffle(all_cases)
     return all_cases
@@ -148,7 +155,7 @@ def main():
     ap.add_argument("--no_console", action="store_true")
 
     # pacing & throttling
-    ap.add_argument("--delay_ms", type=int, default=1500, help="delay between cases")
+    ap.add_argument("--delay_ms", type=int, default=2000, help="delay between cases")
     ap.add_argument("--jitter_ms", type=int, default=400, help="random extra wait per case")
     ap.add_argument("--min_interval_ms", type=int, default=1400, help="passed to page as ?min_interval_ms")
     ap.add_argument("--tries", type=int, default=1, help="passed to page as ?tries (cap attempts)")
@@ -158,8 +165,11 @@ def main():
     ap.add_argument("--cooldown_ms", type=int, default=90000)
 
     # batching
-    ap.add_argument("--batch_size", type=int, default=12, help="cases per batch before pausing")
-    ap.add_argument("--batch_pause_ms", type=int, default=90000, help="pause between batches")
+    ap.add_argument("--batch_size", type=int, default=10, help="cases per batch before pausing")
+    ap.add_argument("--batch_pause_ms", type=int, default=2000, help="pause between batches")
+    
+    # specific case testing
+    ap.add_argument("--specific_case", help="test only cases containing this text (e.g., 'tooltip', 'error', 'button')")
 
     args = ap.parse_args()
     include = [s.strip().lower() for s in args.include.split(",") if s.strip()]
@@ -175,9 +185,11 @@ def main():
     runs_path = os.path.join(args.out_dir, f"runs_{ts}_{args.tag}.jsonl")
     summary_path = os.path.join(args.out_dir, f"summary_{ts}_{args.tag}.json")
 
-    all_cases = expand_cases(args.include, args.replicates)
+    all_cases = expand_cases(args.include, args.replicates, args.specific_case)
     total = len(all_cases)
     builtins.print(f"Total cases: {total}  include={args.include}  replicates={args.replicates}")
+    if args.specific_case:
+        builtins.print(f"Filtered to cases containing: '{args.specific_case}'")
     if total == 0:
         builtins.print("No cases to run. Check --include.")
         return 1

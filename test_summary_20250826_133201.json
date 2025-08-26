@@ -1,0 +1,276 @@
+{
+  "generated_at": "2025-08-26T13:32:01.101871",
+  "total_cases": 20,
+  "success_rate": 1.0,
+  "average_trs": 89.3,
+  "by_type": {
+    "microcopy": {
+      "total": 20,
+      "success": 20,
+      "trs_sum": 1786,
+      "trs_count": 20
+    }
+  },
+  "cases": [
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "decline"
+      },
+      "success": true,
+      "duration_ms": 1644,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Decline"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "server offline"
+      },
+      "success": true,
+      "duration_ms": 2294,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Servers are offline. Retry"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "rate_limited"
+      },
+      "success": true,
+      "duration_ms": 1610,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Retry in a bit"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "resend_code"
+      },
+      "success": true,
+      "duration_ms": 1618,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Resend Code"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "submit"
+      },
+      "success": true,
+      "duration_ms": 1615,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Submit Now"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "confirm details"
+      },
+      "success": true,
+      "duration_ms": 1746,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Confirm Your Details"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "why we need this info"
+      },
+      "success": true,
+      "duration_ms": 1775,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Upload your proof of income"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "upload file"
+      },
+      "success": true,
+      "duration_ms": 3073,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Upload Your File"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "pay now"
+      },
+      "success": true,
+      "duration_ms": 1563,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Pay Now"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "explain coverage limit"
+      },
+      "success": true,
+      "duration_ms": 1709,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "See Coverage Limit"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "dns_error"
+      },
+      "success": true,
+      "duration_ms": 1921,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Retry server connection"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "agree"
+      },
+      "success": true,
+      "duration_ms": 1879,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Verify and Continue"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "timeout_error"
+      },
+      "success": true,
+      "duration_ms": 1571,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Retry now"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "verify code"
+      },
+      "success": true,
+      "duration_ms": 1697,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Verify Your Code"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "next"
+      },
+      "success": true,
+      "duration_ms": 1559,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Next Step"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "password rules"
+      },
+      "success": true,
+      "duration_ms": 1785,
+      "trs": 72,
+      "verdict": "borderline",
+      "result": "Use numbers, symbols, and 12"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "save"
+      },
+      "success": true,
+      "duration_ms": 1579,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Save Changes"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "server error"
+      },
+      "success": true,
+      "duration_ms": 1858,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Retry our servers"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "maintenance_window"
+      },
+      "success": true,
+      "duration_ms": 1607,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Retry during maintenance"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "back"
+      },
+      "success": true,
+      "duration_ms": 1580,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Back"
+    }
+  ]
+}

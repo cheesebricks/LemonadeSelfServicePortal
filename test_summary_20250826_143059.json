@@ -1,0 +1,276 @@
+{
+  "generated_at": "2025-08-26T14:30:59.543265",
+  "total_cases": 20,
+  "success_rate": 1.0,
+  "average_trs": 87.4,
+  "by_type": {
+    "microcopy": {
+      "total": 20,
+      "success": 20,
+      "trs_sum": 1748,
+      "trs_count": 20
+    }
+  },
+  "cases": [
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "pay now"
+      },
+      "success": true,
+      "duration_ms": 1653,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Pay Now"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "timeout_error"
+      },
+      "success": true,
+      "duration_ms": 1765,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "That took too long. Please"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "submit"
+      },
+      "success": true,
+      "duration_ms": 1758,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Next"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "resend_code"
+      },
+      "success": true,
+      "duration_ms": 1795,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Resend Code"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "server offline"
+      },
+      "success": true,
+      "duration_ms": 2002,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Our servers are currently offline"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "why we need this info"
+      },
+      "success": true,
+      "duration_ms": 1611,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "why we need your phone"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "password rules"
+      },
+      "success": true,
+      "duration_ms": 1616,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Use at least 12 characters"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "rate_limited"
+      },
+      "success": true,
+      "duration_ms": 1657,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Too many attempts. Try again"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "server error"
+      },
+      "success": true,
+      "duration_ms": 1610,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Server error. We're experiencing technical"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "confirm details"
+      },
+      "success": true,
+      "duration_ms": 1619,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Next, Confirm"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "save"
+      },
+      "success": true,
+      "duration_ms": 1609,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Save"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "dns_error"
+      },
+      "success": true,
+      "duration_ms": 1622,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "We couldn't find the DNS"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "upload file"
+      },
+      "success": true,
+      "duration_ms": 1685,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Upload File"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "decline"
+      },
+      "success": true,
+      "duration_ms": 1619,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Decline"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "back"
+      },
+      "success": true,
+      "duration_ms": 1627,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Back"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "maintenance_window"
+      },
+      "success": true,
+      "duration_ms": 2450,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "Our maintenance team is working"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "agree"
+      },
+      "success": true,
+      "duration_ms": 1627,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Agree Now"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "next"
+      },
+      "success": true,
+      "duration_ms": 1849,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Next"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "explain coverage limit"
+      },
+      "success": true,
+      "duration_ms": 1618,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "ll pay for your medical"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "verify code"
+      },
+      "success": true,
+      "duration_ms": 1650,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Verify Code"
+    }
+  ]
+}
