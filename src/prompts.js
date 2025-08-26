@@ -46,12 +46,13 @@ export function genTemplate_generate({ type, traits, params, refs, preferred, ba
     const task =
 `TASK: Generate Microcopy (CTA)
 SURFACE: ${params?.surface || 'button'}
-INTENT: ${params?.intent || 'generic'}
+INTENT: ${params?.intent_canonical || params?.intent || 'generic'}
 ${refsBlock(refs)}
 REQUIREMENTS:
 - ≤ 5 words, action-first verb.
 - No "and", no punctuation junk.
 - No quotes around the whole CTA.
+- Use only words essential to the INTENT; avoid adding adverbs like "instantly" or qualifiers unless present in INTENT.
 OUTPUT: Only the final CTA.`;
     return { system: sys, user: task };
   }

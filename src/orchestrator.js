@@ -183,6 +183,48 @@ function applySynonyms(type, params, push) {
     }
     return;
   }
+
+  // Microcopy mappings — normalize intent to canonical keys for lexicon
+  if (type === 'microcopy') {
+    if (params.intent && !params.intent_canonical) {
+      const raw = String(params.intent).toLowerCase();
+      const CANON = [
+        'close','dismiss','cancel','back','done','ok','okay','got it',
+        'confirm action','confirm','agree','accept','approve','yes',
+        'continue flow','continue','next','proceed','keep going',
+        'contact support','get help','chat','message us','contact',
+        'upload docs','upload','add files','attach','submit docs','upload file',
+        'pay','checkout','complete payment','pay now',
+        'try again','retry',
+        'start','get started','begin',
+        'start claim','file claim',
+        'update profile','edit profile',
+        'cancel action','nevermind',
+        'help','learn more',
+        'verify code','verify',
+        'save','submit','next','back'
+      ];
+      let found = '';
+      for (const key of CANON) {
+        const tokens = key.split(/\s+/).filter(Boolean);
+        const hit = tokens.every(t => raw.includes(t));
+        if (hit) { found = key.split(' ').slice(0, 2).join(' '); break; }
+      }
+      if (!found) {
+        // fallback: single keyword heuristics
+        if (/pay/.test(raw)) found = 'pay';
+        else if (/start.*claim|claim/.test(raw)) found = 'start claim';
+        else if (/start|get\s*started|begin/.test(raw)) found = 'start';
+        else if (/upload/.test(raw)) found = 'upload';
+        else if (/verify/.test(raw)) found = 'verify code';
+        else if (/continue|next|proceed/.test(raw)) found = 'continue';
+        else if (/retry|again/.test(raw)) found = 'try again';
+        else if (/cancel|nevermind/.test(raw)) found = 'cancel';
+      }
+      if (found) params.intent_canonical = found;
+    }
+    return;
+  }
 }
 
 const attemptMeta = (kind, s, latencyMs) => ({
@@ -229,7 +271,7 @@ export async function runPipeline({ type, params, onLog }) {
     if (corpus?.error) push(`⚠️ Corpus load error: ${corpus.error}`);
 
     const refs = pickRefs(corpus, matchOn, params, refsN);
-    const intentPack = getIntentLexicon(type, params.intent);
+    const intentPack = getIntentLexicon(type, params.intent_canonical || params.intent);
     const preferredAll = Array.from(new Set([...(corpus?.preferred_lexicon || []), ...(intentPack?.preferred || [])]));
     const bannedAll    = Array.from(new Set([...(corpus?.banned_lexicon || []),   ...(intentPack?.banned || [])]));
 
