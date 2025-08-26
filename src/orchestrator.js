@@ -236,6 +236,17 @@ export async function runPipeline({ type, params, onLog }) {
     push(`📚 Picked ${refs.length} on-voice refs (matchOn: ${matchOn.join(', ') || '—'}).`);
     push(`🔤 Lexicon merged — preferred ${preferredAll.length}, banned ${bannedAll.length}.`);
     push(`🧪 Traits: ${compactTraits(traits)}`);
+    if (VERBOSE && Array.isArray(refs) && refs.length > 0) {
+      try {
+        const refLines = refs.map((r, i) => {
+          const id = r?.id || r?.ref_id || `ref#${i + 1}`;
+          const text = String(r?.text || r?.body || r?.headline || '')
+            .replace(/\s+/g, ' ').trim();
+          return `  • ${id} — ${snip(text, 160)}`;
+        });
+        push(`📎 Refs selected:\n${refLines.join('\n')}`);
+      } catch {}
+    }
 
     // 3) Generate initial
     const tpl1 = genTemplate_generate({
