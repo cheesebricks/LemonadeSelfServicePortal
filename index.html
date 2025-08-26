@@ -1,24 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Self‑Service Content Generator</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lemonade Self-Service Content Portal · Phase-1</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Self‑Service Content Generator</h1>
-    <label for="use-case">Select use case:</label>
-    <select id="use-case">
-      <option value="">-- Choose a use case --</option>
-      <option value="pr">Pull Request Description</option>
-      <option value="microcopy">Microcopy</option>
-      <option value="blogpost">Blog Post</option>
-    </select>
-    <div id="param-fields"></div>
-    <button id="submit-btn">Generate</button>
-    <div id="result" class="result"></div>
-  </div>
-<script src="script.js"></script>
+  <header class="lm-header">
+    <div class="wrap head-row">
+      <div class="brand">
+        <img src="./assets/logo.svg" alt="Lemonade" class="logo" />
+        <h1>Content-as-a-Service · Phase-1</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Use-case picker -->
+    <section class="card center">
+      <h2 class="section-title">Pick a content type</h2>
+      <div id="type-picker" class="segmented">
+        <button data-type="microcopy" class="seg active">Microcopy</button>
+        <button data-type="press_release" class="seg">PR / External</button>
+        <button data-type="internal_comms" class="seg">Internal Comms</button>
+      </div>
+      <p class="hint">We’ll keep this light and lovely.</p>
+    </section>
+
+    <!-- Dynamic form -->
+    <section id="form-card" class="card center">
+      <h2 id="form-title" class="section-title">Microcopy</h2>
+      <form id="params-form" class="grid">
+        <!-- ui.js renders fields here -->
+      </form>
+      <div class="actions center-row">
+        <button id="generate-btn" class="btn btn-primary" disabled>Generate</button>
+      </div>
+    </section>
+
+    <!-- Log panel -->
+    <section class="card center hide" id="log-card">
+      <h2 class="section-title">Log</h2>
+      <div id="log-panel" class="log-panel" role="log" aria-live="polite"></div>
+    </section>
+
+    <!-- Result card -->
+    <section class="card center hide" id="result-card">
+      <div class="result-head">
+        <h2 class="section-title">Result</h2>
+        <div id="verdict-pill" class="pill pill--idle" aria-live="polite">—</div>
+      </div>
+
+      <textarea
+        id="result-text"
+        rows="8"
+        class="mono result-text"
+        placeholder="Generated text will appear here…"
+        aria-label="Generated result"
+      ></textarea>
+
+      <div id="trs-breakdown" class="trs-line" aria-live="polite"></div>
+
+      <div class="result-actions">
+        <button id="copy-result-btn" class="btn btn-primary" type="button">Like it — Copy</button>
+        <button id="regenerate-btn" class="btn btn-ghost" type="button">Yikes — New one</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <small>Phase-1 skeleton • Lemonade pink vibes • Vanilla JS</small>
+  </footer>
+
+  <!-- KPI Drawer -->
+  <aside id="kpi-drawer" class="kpi-drawer" aria-label="Performance dashboard" aria-hidden="true">
+    <div class="kpi-panel" role="region" aria-labelledby="kpi-title">
+      <div class="kpi-panel-header">
+        <h3 id="kpi-title">KPIs (last 50)</h3>
+        <button id="kpi-close" class="btn btn-ghost btn-xs" aria-label="Close KPIs">✕</button>
+      </div>
+
+      <div class="kpi-stats">
+        <div class="stat">
+          <div class="stat-label">North Star</div>
+          <div id="kpi-northstar" class="stat-value">—</div>
+          <div class="stat-sub">Copied w/o Redo</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">TRS Pass Rate</div>
+          <div id="kpi-passrate" class="stat-value">—</div>
+          <div class="stat-sub">Pass + Borderline</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Avg time (all)</div>
+          <div id="kpi-avgall" class="stat-value">—</div>
+          <div class="stat-sub">From click → result</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Avg time (usable)</div>
+          <div id="kpi-avgusable" class="stat-value">—</div>
+          <div class="stat-sub">Pass/Borderline only</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Borderline Retry</div>
+          <div id="kpi-border-retry" class="stat-value">—</div>
+          <div class="stat-sub">% with >1 attempts</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Runs</div>
+          <div id="kpi-runs" class="stat-value">0</div>
+          <div class="stat-sub">Last 50</div>
+        </div>
+      </div>
+
+      <div class="kpi-type">
+        <h4>By content type</h4>
+        <div id="kpi-type-breakdown" class="type-list"></div>
+      </div>
+
+      <div class="kpi-actions">
+        <button id="export-events" class="btn btn-ghost btn-xs" type="button">Export Events</button>
+        <button id="export-feedback" class="btn btn-ghost btn-xs" type="button">Export Feedback</button>
+      </div>
+    </div>
+
+    <button id="kpi-toggle" class="kpi-handle" aria-expanded="false" aria-controls="kpi-drawer" title="Open KPIs">
+      📊 KPIs
+    </button>
+  </aside>
+
+  <!-- index.html lives in /public -->
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
