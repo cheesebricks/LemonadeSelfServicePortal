@@ -69,6 +69,8 @@ REQUIREMENTS:
 - If CHANNEL is Slack: Keep it to 1–2 short lines; crisp; no emoji or slang.
 - If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body; professional, friendly.
 - Include at least 2 of: ${keywordList(params?.title, params?.key_update)} in the first sentence/paragraph.
+- Produce exactly ONE message for the specified CHANNEL only — do not include content for any other channel.
+- Do NOT include channel prefixes or labels like "Slack:" or "Email:".
 ${noPrefaceGuards('')}
 OUTPUT: Only the final text.`;
     return { system: sys, user: task };
@@ -98,9 +100,13 @@ export function genTemplate_revise({ type, traits, params, refs, preferred, bann
   const fixLines = (fixes || []).map((f, i) => `  ${i + 1}. ${f}`).join('\n');
   const localeLine = (type === 'microcopy') ? '' : `\nLOCALE: ${params?.locale || 'en-US'}`;
 
+  const internalFormat = (type === 'internal_comms')
+    ? `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".`
+    : '';
+
   const task =
 `TASK: Revise the text to improve TRS.
-TYPE: ${type}
+TYPE: ${type}${internalFormat}
 ${localeLine}
 INPUT TEXT:
 """
