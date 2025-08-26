@@ -42,10 +42,7 @@ export function renderForm(type){
         {v:'Slack', l:'Slack'}, {v:'Email', l:'Email'}
       ], true),
       rowInput('Title', 'title', 'Short subject', true),
-      rowTextarea('Key update', 'keyUpdate', 'What’s changing?', true),
-      rowSelect('Audience', 'audience', [
-        {v:'Eng', l:'Eng'}, {v:'All-hands', l:'All-hands'}
-      ], true)
+      rowTextarea('Key update', 'keyUpdate', 'What’s changing?', true)
     );
   }
 }
@@ -65,7 +62,7 @@ export function validate(type){
     return !!(p.headline && p.keyMessage && p.audience);
   }
   if (type === 'internal_comms') {
-    return !!(p.channel && p.title && p.keyUpdate && p.audience);
+    return !!(p.channel && p.title && p.keyUpdate);
   }
   return false;
 }

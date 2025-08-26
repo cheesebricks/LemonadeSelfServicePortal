@@ -181,13 +181,6 @@ function applySynonyms(type, params, push) {
       const k = ['channel','medium','platform'];
       for (const key of k) { if (params[key]) { params.channel = params[key]; if (key !== 'channel') push(`🧩 Mapped Internal field ${key} → channel`); break; } }
     }
-    // audience
-    if (!params.audience) {
-      const k = ['audience','team','dept','department','group'];
-      for (const key of k) { if (params[key]) { params.audience = params[key]; if (key !== 'audience') push(`🧩 Mapped Internal field ${key} → audience`); break; } }
-    }
-    // sensible default if still missing audience
-    if (!params.audience) { params.audience = 'all'; push('🧩 Defaulted Internal audience → all'); }
     return;
   }
 }

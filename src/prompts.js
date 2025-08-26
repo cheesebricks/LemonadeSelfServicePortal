@@ -60,15 +60,15 @@ OUTPUT: Only the final CTA.`;
     const task =
 `TASK: Internal Comms announcement.
 CHANNEL: ${params?.channel || 'Slack'}
-AUDIENCE: ${params?.audience || 'all-hands'}
 LOCALE: ${params?.locale || 'en-US'}
 TITLE: ${params?.title || ''}
 KEY UPDATE: ${params?.key_update || ''}
 ${lexiconLines([], params?.banned || [])}
 ${refsBlock(refs)}
 REQUIREMENTS:
-- First sentence MUST include at least 2 of: ${keywordList(params?.title, params?.key_update)}.
-- Professional, friendly, no marketing fluff, no emoji or slang.
+- If CHANNEL is Slack: Keep it to 1–2 short lines; crisp; no emoji or slang.
+- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body; professional, friendly.
+- Include at least 2 of: ${keywordList(params?.title, params?.key_update)} in the first sentence/paragraph.
 ${noPrefaceGuards('')}
 OUTPUT: Only the final text.`;
     return { system: sys, user: task };

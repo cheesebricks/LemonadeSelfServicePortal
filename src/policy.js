@@ -50,8 +50,8 @@ export function getPolicy(contentType) {
     return {
       ...base,
       typeName: "Internal Comms",
-      required: ["channel", "audience", "title", "key_update", "locale"],
-      corpus: { matchOn: ["audience", "locale", "title"], refs: 3 },
+      required: ["channel", "title", "key_update", "locale"],
+      corpus: { matchOn: ["locale", "title"], refs: 3 },
       traits: { witty: 0.3, empathetic: 0.7, clear: 1 },
       prefer: ["heads up", "join us", "please note", "details below", "see you there", "today", "tomorrow"],
       bannedWords: ["ai-native", "automation", "oncall", "giveback", "community", "emoji", "lol", "btw", "pls", "u", "thx"],
@@ -100,16 +100,13 @@ export function validateRequired(type, params = {}) {
 
 export function getTraits(type, params = {}) {
   const p = getPolicy(type);
-  // Tweak for Internal Comms: All-hands → less witty, more empathetic
-  if (type === "internal_comms" && typeof params.audience === "string" && /all-?hands/i.test(params.audience)) {
-    return { witty: 0.2, empathetic: 0.8, clear: 1 };
-  }
+  // No audience-based tweaks for Internal Comms anymore
   // Tailor PR / External tone by audience
   if (type === "press_release") {
     const aud = String(params.audience || '').toLowerCase();
     if (aud === 'press') return { witty: 0.2, empathetic: 0.5, clear: 1 };
-    if (aud === 'customers') return { witty: 0.3, empathetic: 0.6, clear: 1 };
-    if (aud === 'investors') return { witty: 0.1, empathetic: 0.3, clear: 1 };
+    if (aud === 'customer') return { witty: 0.3, empathetic: 0.6, clear: 1 };
+    if (aud === 'investor') return { witty: 0.1, empathetic: 0.3, clear: 1 };
   }
   return p.traits;
 }
