@@ -1,0 +1,457 @@
+{
+  "generated_at": "2025-08-26T16:24:29.694793",
+  "total_cases": 33,
+  "success_rate": 1.0,
+  "average_trs": 87.0909090909091,
+  "by_type": {
+    "press_release": {
+      "total": 6,
+      "success": 6,
+      "trs_sum": 528,
+      "trs_count": 6
+    },
+    "microcopy": {
+      "total": 20,
+      "success": 20,
+      "trs_sum": 1758,
+      "trs_count": 20
+    },
+    "internal_comms": {
+      "total": 7,
+      "success": 7,
+      "trs_sum": 588,
+      "trs_count": 7
+    }
+  },
+  "cases": [
+    {
+      "type": "press_release",
+      "params": {
+        "audience": "investors",
+        "headline": "Unit economics update",
+        "key_message": "loss ratio trends and disciplined growth across geos"
+      },
+      "success": true,
+      "duration_ms": 1679,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Lemonade, Inc. (NYSE: LMND) today reported its unit economics update, highlighting disciplined growth across geos and trends in loss ratio. The company's second-quarter results demonstrate accelerating growth in its car product and European markets, accompanied by ongoing expense discipline."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "confirm details"
+      },
+      "success": true,
+      "duration_ms": 1632,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Confirm Details"
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Slack",
+        "title": "phishing drills",
+        "key_update": "phishing simulation next week; report suspicious emails"
+      },
+      "success": true,
+      "duration_ms": 1679,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "Next week, we'll be conducting a phishing simulation to help us stay vigilant against suspicious emails. Please report any suspicious emails you receive during the simulation to help us identify potential threats."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "agree"
+      },
+      "success": true,
+      "duration_ms": 1614,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Agree"
+    },
+    {
+      "type": "press_release",
+      "params": {
+        "audience": "customers",
+        "headline": "Pet Wellness expands in EU",
+        "key_message": "simpler care and instant everything for your furry family"
+      },
+      "success": true,
+      "duration_ms": 1681,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Lemonade, the digital insurer, is expanding its pet wellness services in the European Union, making it easier for pet owners to provide simpler care for their furry family members. With instant everything, pet owners can now verify, confirm, and resend claims in a matter of seconds, giving them peace of mind when it matters most. This expansion is part of Lemonade's commitment to providing transparent pricing and community-driven Giveback, donating unused premiums to nonprofits chosen by customers."
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Email",
+        "title": "company event",
+        "key_update": "all-hands offsite confirmed for next month, details soon"
+      },
+      "success": true,
+      "duration_ms": 2070,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "Company Event\n\nWe're excited to confirm that our all-hands offsite event is scheduled for next month! Details will follow soon, but for now, save the date and get ready for a fun and productive gathering."
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Slack",
+        "title": "db maintenance",
+        "key_update": "analytics warehouse maintenance Friday 22:00-23:00 UTC"
+      },
+      "success": true,
+      "duration_ms": 1723,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "We're performing analytics warehouse maintenance on Friday from 22:00-23:00 UTC. This maintenance is necessary to ensure the accuracy of our analytics data."
+    },
+    {
+      "type": "press_release",
+      "params": {
+        "audience": "investors",
+        "headline": "Q2 2025 results posted",
+        "key_message": "growth, underwriting health, and continued operating efficiency"
+      },
+      "success": true,
+      "duration_ms": 1793,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) today reported its second-quarter 2025 results, showcasing continued growth, underwriting health, and operating efficiency improvements. The company's disciplined approach to underwriting and expense management enabled it to maintain a strong financial position, while its car product and European markets demonstrated accelerating growth."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "server offline"
+      },
+      "success": true,
+      "duration_ms": 1676,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Our servers are offline"
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Email",
+        "title": "holiday coverage",
+        "key_update": "reduced coverage on national holiday; escalation as usual"
+      },
+      "success": true,
+      "duration_ms": 1655,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "Holiday Coverage\n\nWe wanted to remind you that our holiday coverage will be reduced on the upcoming national holiday. In the event of an issue, escalation will occur as usual, so you can continue to rely on our support.\n\nBest,"
+    },
+    {
+      "type": "press_release",
+      "params": {
+        "audience": "press",
+        "headline": "Lemonade reports strong Q2 growth",
+        "key_message": "accelerating growth with healthy underwriting and expense discipline"
+      },
+      "success": true,
+      "duration_ms": 1908,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Lemonade, Inc. (NYSE: LMND) today reported strong second-quarter growth, driven by accelerating growth with healthy underwriting and expense discipline. The company's continued focus on operating efficiency improvements enabled it to maintain a strong financial position, positioning it for future growth."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "resend_code"
+      },
+      "success": true,
+      "duration_ms": 1664,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Resend Code"
+    },
+    {
+      "type": "press_release",
+      "params": {
+        "audience": "customers",
+        "headline": "Faster claim decisions",
+        "key_message": "more customers get paid in minutes with zero paperwork"
+      },
+      "success": true,
+      "duration_ms": 1730,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Lemonade is revolutionizing the way customers receive compensation for claims, now paying out more customers in minutes with zero paperwork required. This significant improvement in processing speed and efficiency is a direct result of our commitment to automation and instant everything, allowing us to provide faster and more transparent claims decisions. With our digital insurer model built on AI and social impact, we're dedicated to giving back to our community through our annual Giveback program, donating unused premiums to nonprofits chosen by our customers."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "pay now"
+      },
+      "success": true,
+      "duration_ms": 1870,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Pay Now"
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Slack",
+        "title": "roadmap sync moved",
+        "key_update": "product roadmap sync moved to Tuesdays 11:00"
+      },
+      "success": true,
+      "duration_ms": 2153,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "We've moved our product roadmap sync to Tuesdays at 11:00. From now on, you can expect to receive updates on the latest developments every Tuesday morning."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "explain coverage limit"
+      },
+      "success": true,
+      "duration_ms": 1705,
+      "trs": 83,
+      "verdict": "pass",
+      "result": "Your coverage limit is the maximum amount we'll pay for a single claim"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "next"
+      },
+      "success": true,
+      "duration_ms": 1693,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Next"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "submit"
+      },
+      "success": true,
+      "duration_ms": 1650,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Submit"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "rate_limited"
+      },
+      "success": true,
+      "duration_ms": 1626,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "You've reached your limit"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "save"
+      },
+      "success": true,
+      "duration_ms": 1632,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Save"
+    },
+    {
+      "type": "press_release",
+      "params": {
+        "audience": "press",
+        "headline": "Lemonade renews reinsurance program",
+        "key_message": "supports growth while reducing earnings volatility"
+      },
+      "success": true,
+      "duration_ms": 1632,
+      "trs": 88,
+      "verdict": "pass",
+      "result": "Lemonade renews reinsurance program to support growth while reducing earnings volatility. The digital insurer has renewed its reinsurance program, ensuring continued stability and flexibility as it expands its offerings and enters new markets. This strategic move enables Lemonade to maintain its focus on disciplined underwriting and operating efficiency, while also mitigating the impact of unpredictable market fluctuations on its earnings."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "maintenance_window"
+      },
+      "success": true,
+      "duration_ms": 1739,
+      "trs": 80,
+      "verdict": "pass",
+      "result": "Our maintenance window is currently open"
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Email",
+        "title": "design crit changes",
+        "key_update": "weekly crit now pairs; submit figs by EOD Monday"
+      },
+      "success": true,
+      "duration_ms": 1653,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "design crit changes\n\nWe've made some changes to our weekly design crit process. Now, it pairs you with a design buddy to provide instant feedback on your work. To continue, please submit your figures by the end of day Monday."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "timeout_error"
+      },
+      "success": true,
+      "duration_ms": 1939,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "That took too long"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "upload file"
+      },
+      "success": true,
+      "duration_ms": 1637,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Upload File"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "server error"
+      },
+      "success": true,
+      "duration_ms": 1642,
+      "trs": 77,
+      "verdict": "borderline",
+      "result": "Our servers are experiencing technical difficulties"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "verify code"
+      },
+      "success": true,
+      "duration_ms": 1744,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "Verify Code"
+    },
+    {
+      "type": "internal_comms",
+      "params": {
+        "channel": "Slack",
+        "title": "office policy refresh",
+        "key_update": "quiet rooms first-come; new booking rules apply"
+      },
+      "success": true,
+      "duration_ms": 1701,
+      "trs": 84,
+      "verdict": "pass",
+      "result": "We're refreshing our office policy to better support your work-life balance. Starting immediately, quiet rooms will be available on a first-come basis, with new booking rules in place."
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "decline"
+      },
+      "success": true,
+      "duration_ms": 1621,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Decline"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "button",
+        "surface": "button",
+        "intent": "back"
+      },
+      "success": true,
+      "duration_ms": 1630,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Back"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "password rules"
+      },
+      "success": true,
+      "duration_ms": 1986,
+      "trs": 75,
+      "verdict": "borderline",
+      "result": "Use at least 12 characters, including a number and symbol"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "why we need this info"
+      },
+      "success": true,
+      "duration_ms": 1763,
+      "trs": 79,
+      "verdict": "borderline",
+      "result": "We'll use it to verify your identity and keep your account secure"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "error",
+        "surface": "error",
+        "intent": "dns_error"
+      },
+      "success": true,
+      "duration_ms": 4683,
+      "trs": 92,
+      "verdict": "pass",
+      "result": "Couldn't find the DNS server"
+    }
+  ]
+}

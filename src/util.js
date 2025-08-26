@@ -83,10 +83,16 @@ export function enforceOutputShape(type, text, params = {}) {
       // Clean up but keep helpful punctuation
       t = t.replace(/[,…;]+$/g, '').trim();
     } else if (uiContext === 'tooltip') {
-      // Tooltip: Longer (1-2 sentences), helpful, contextual
-      // Don't truncate - let the full helpful content through
-      // Just clean up excessive punctuation
+      // Tooltip: Concise (1 sentence max), helpful, contextual
+      const sentences = t.split(/[.!?]+/).filter(s => s.trim().length > 0);
+      t = sentences[0]?.trim() || t;
+      // Clean up but keep helpful punctuation
       t = t.replace(/[,…;]+$/g, '').trim();
+      // Ensure it's not too long - cap at reasonable tooltip length
+      if (t.length > 120) {
+        const words = t.split(/\s+/).filter(Boolean);
+        t = words.slice(0, 15).join(' ').replace(/[,…;]+$/g, '').trim();
+      }
     }
     
     return t;

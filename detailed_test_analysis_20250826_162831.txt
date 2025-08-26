@@ -1,0 +1,120 @@
+DETAILED TEST RESULTS ANALYSIS
+================================================================================
+Generated: 2025-08-26 16:28:31
+Total Cases: 3
+================================================================================
+
+SUMMARY STATISTICS
+----------------------------------------
+Overall Success Rate: 3/3 (100.0%)
+Average TRS Score: 95.33
+
+MICROCOPY:
+  Cases: 3
+  Success: 3/3 (100.0%)
+  Avg TRS: 95.33
+
+================================================================================
+
+DETAILED CASE ANALYSIS
+================================================================================
+
+================================================================================
+TEST CASE #1
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "explain coverage limit"
+}
+Duration: 1796ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Your coverage limit is the maximum amount we'll pay for a single claim
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #2
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "password rules"
+}
+Duration: 1745ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Use at least 12 characters, including a number and symbol
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 32/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #3
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "why we need this info"
+}
+Duration: 2110ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Why do we need your phone number
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+

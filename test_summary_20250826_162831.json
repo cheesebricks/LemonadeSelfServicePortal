@@ -1,0 +1,55 @@
+{
+  "generated_at": "2025-08-26T16:28:31.359525",
+  "total_cases": 3,
+  "success_rate": 1.0,
+  "average_trs": 95.33333333333333,
+  "by_type": {
+    "microcopy": {
+      "total": 3,
+      "success": 3,
+      "trs_sum": 286,
+      "trs_count": 3
+    }
+  },
+  "cases": [
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "explain coverage limit"
+      },
+      "success": true,
+      "duration_ms": 1796,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Your coverage limit is the maximum amount we'll pay for a single claim"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "password rules"
+      },
+      "success": true,
+      "duration_ms": 1745,
+      "trs": 90,
+      "verdict": "pass",
+      "result": "Use at least 12 characters, including a number and symbol"
+    },
+    {
+      "type": "microcopy",
+      "params": {
+        "uiContext": "tooltip",
+        "surface": "tooltip",
+        "intent": "why we need this info"
+      },
+      "success": true,
+      "duration_ms": 2110,
+      "trs": 98,
+      "verdict": "pass",
+      "result": "Why do we need your phone number"
+    }
+  ]
+}

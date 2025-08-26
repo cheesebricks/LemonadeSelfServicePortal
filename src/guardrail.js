@@ -43,8 +43,21 @@ function rulesScore(text, contentType, inputs, policy) {
 
   if (contentType === "microcopy") {
     const n = wc(t);
+    const uiContext = inputs?.uiContext || 'button';
+    
     if (n === 0) s -= 30;
-    if (n > MICRO_MAX_WORDS) s -= 15;
+    
+    // Different word limits for different UI contexts
+    if (uiContext === 'button') {
+      if (n > MICRO_MAX_WORDS) s -= 15; // Buttons: ≤5 words
+    } else if (uiContext === 'error') {
+      if (n > 15) s -= 10; // Errors: ≤15 words
+    } else if (uiContext === 'tooltip') {
+      if (n > 15) s -= 10; // Tooltips: ≤15 words
+    } else {
+      if (n > MICRO_MAX_WORDS) s -= 15; // Default: ≤5 words
+    }
+    
     if (/\band\b/i.test(t)) s -= 4;
     if (/[;,/]/.test(t)) s -= 4;
 

@@ -61,9 +61,10 @@ BUTTON REQUIREMENTS:
     } else if (uiContext === 'tooltip') {
       contextRequirements = `
 TOOLTIP REQUIREMENTS:
-- Longer (1-2 sentences), helpful, contextual
-- Explain the purpose or benefit related to the object
-- Provide useful information that enhances understanding`;
+- Concise (1 sentence max), helpful, contextual
+- Focus on the specific INTENT/question - answer it directly
+- Avoid marketing language or promotional content
+- Be informative but brief - tooltips should be quick to read`;
     }
     
     const task =
@@ -134,7 +135,7 @@ export function genTemplate_revise({ type, traits, params, refs, preferred, bann
     } else if (uiContext === 'button') {
       contextFormat = `\nUI CONTEXT: Button\nFORMAT RULES:\n- Short (≤ 5 words), direct, simple, action-first\n- Prefer "Next" over "Next step", "Continue" over "Continue to next page"\n- No unnecessary words or qualifiers`;
     } else if (uiContext === 'tooltip') {
-      contextFormat = `\nUI CONTEXT: Tooltip\nFORMAT RULES:\n- Longer (1-2 sentences), helpful, contextual\n- Explain the purpose or benefit related to the object\n- Provide useful information that enhances understanding`;
+      contextFormat = `\nUI CONTEXT: Tooltip\nFORMAT RULES:\n- Concise (1 sentence max), helpful, contextual\n- Focus on the specific INTENT/question - answer it directly\n- Avoid marketing language or promotional content\n- Be informative but brief - tooltips should be quick to read`;
     }
   }
 

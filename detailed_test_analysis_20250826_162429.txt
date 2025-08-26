@@ -1,0 +1,1123 @@
+DETAILED TEST RESULTS ANALYSIS
+================================================================================
+Generated: 2025-08-26 16:24:29
+Total Cases: 33
+================================================================================
+
+SUMMARY STATISTICS
+----------------------------------------
+Overall Success Rate: 33/33 (100.0%)
+Average TRS Score: 87.09
+
+PRESS_RELEASE:
+  Cases: 6
+  Success: 6/6 (100.0%)
+  Avg TRS: 88.00
+
+MICROCOPY:
+  Cases: 20
+  Success: 20/20 (100.0%)
+  Avg TRS: 87.90
+
+INTERNAL_COMMS:
+  Cases: 7
+  Success: 7/7 (100.0%)
+  Avg TRS: 84.00
+
+================================================================================
+
+DETAILED CASE ANALYSIS
+================================================================================
+
+================================================================================
+TEST CASE #1
+================================================================================
+Type: press_release
+Parameters: {
+  "audience": "investors",
+  "headline": "Unit economics update",
+  "key_message": "loss ratio trends and disciplined growth across geos"
+}
+Duration: 1679ms
+Success: True
+
+SELECTED REFERENCES:
+  • pr-lede-press-0001 — NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) reported second‑quarter results marked by accelerating growth and disciplined underwriting, with contin…
+  • pr-quote-press-0001 — “This quarter’s performance reflects momentum in our car product and European markets, alongside ongoing expense discipline,” said a Lemonade spokesperson.
+  • pr-boilerplate-press-0001 — About Lemonade: Lemonade (NYSE: LMND) is a digital insurer built on AI and social impact, offering renters, homeowners, car, pet, and life insurance in the U.S…
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Lemonade, Inc. (NYSE: LMND) today reported its unit economics update, highlighting disciplined growth across geos and trends in loss ratio. The company's second-quarter results demonstrate accelerating growth in its car product and European markets, accompanied by ongoing expense discipline.
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #2
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "confirm details"
+}
+Duration: 1632ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_confirm_1 — Confirm details
+  • cta_verify_code_1 — Verify code
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Confirm Details
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #3
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Slack",
+  "title": "phishing drills",
+  "key_update": "phishing simulation next week; report suspicious emails"
+}
+Duration: 1679ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Next week, we'll be conducting a phishing simulation to help us stay vigilant against suspicious emails. Please report any suspicious emails you receive during the simulation to help us identify potential threats.
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #4
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "agree"
+}
+Duration: 1614ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Agree
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 20/40
+
+================================================================================
+TEST CASE #5
+================================================================================
+Type: press_release
+Parameters: {
+  "audience": "customers",
+  "headline": "Pet Wellness expands in EU",
+  "key_message": "simpler care and instant everything for your furry family"
+}
+Duration: 1681ms
+Success: True
+
+SELECTED REFERENCES:
+  • pr-lede-press-0001 — NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) reported second‑quarter results marked by accelerating growth and disciplined underwriting, with contin…
+  • pr-quote-press-0001 — “This quarter’s performance reflects momentum in our car product and European markets, alongside ongoing expense discipline,” said a Lemonade spokesperson.
+  • pr-boilerplate-press-0001 — About Lemonade: Lemonade (NYSE: LMND) is a digital insurer built on AI and social impact, offering renters, homeowners, car, pet, and life insurance in the U.S…
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Lemonade, the digital insurer, is expanding its pet wellness services in the European Union, making it easier for pet owners to provide simpler care for their furry family members. With instant everything, pet owners can now verify, confirm, and resend claims in a matter of seconds, giving them peace of mind when it matters most. This expansion is part of Lemonade's commitment to providing transparent pricing and community-driven Giveback, donating unused premiums to nonprofits chosen by customers.
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #6
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Email",
+  "title": "company event",
+  "key_update": "all-hands offsite confirmed for next month, details soon"
+}
+Duration: 2070ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Company Event
+
+We're excited to confirm that our all-hands offsite event is scheduled for next month! Details will follow soon, but for now, save the date and get ready for a fun and productive gathering.
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #7
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Slack",
+  "title": "db maintenance",
+  "key_update": "analytics warehouse maintenance Friday 22:00-23:00 UTC"
+}
+Duration: 1723ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+We're performing analytics warehouse maintenance on Friday from 22:00-23:00 UTC. This maintenance is necessary to ensure the accuracy of our analytics data.
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #8
+================================================================================
+Type: press_release
+Parameters: {
+  "audience": "investors",
+  "headline": "Q2 2025 results posted",
+  "key_message": "growth, underwriting health, and continued operating efficiency"
+}
+Duration: 1793ms
+Success: True
+
+SELECTED REFERENCES:
+  • pr-lede-press-0001 — NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) reported second‑quarter results marked by accelerating growth and disciplined underwriting, with contin…
+  • pr-quote-press-0001 — “This quarter’s performance reflects momentum in our car product and European markets, alongside ongoing expense discipline,” said a Lemonade spokesperson.
+  • pr-boilerplate-press-0001 — About Lemonade: Lemonade (NYSE: LMND) is a digital insurer built on AI and social impact, offering renters, homeowners, car, pet, and life insurance in the U.S…
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) today reported its second-quarter 2025 results, showcasing continued growth, underwriting health, and operating efficiency improvements. The company's disciplined approach to underwriting and expense management enabled it to maintain a strong financial position, while its car product and European markets demonstrated accelerating growth.
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #9
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "server offline"
+}
+Duration: 1676ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+  • err_timeout_1 — Request timed out. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Our servers are offline
+
+SCORING:
+----------------------------------------
+TRS Score: 92
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 32/40
+
+================================================================================
+TEST CASE #10
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Email",
+  "title": "holiday coverage",
+  "key_update": "reduced coverage on national holiday; escalation as usual"
+}
+Duration: 1655ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Holiday Coverage
+
+We wanted to remind you that our holiday coverage will be reduced on the upcoming national holiday. In the event of an issue, escalation will occur as usual, so you can continue to rely on our support.
+
+Best,
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #11
+================================================================================
+Type: press_release
+Parameters: {
+  "audience": "press",
+  "headline": "Lemonade reports strong Q2 growth",
+  "key_message": "accelerating growth with healthy underwriting and expense discipline"
+}
+Duration: 1908ms
+Success: True
+
+SELECTED REFERENCES:
+  • pr-lede-press-0001 — NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) reported second‑quarter results marked by accelerating growth and disciplined underwriting, with contin…
+  • pr-quote-press-0001 — “This quarter’s performance reflects momentum in our car product and European markets, alongside ongoing expense discipline,” said a Lemonade spokesperson.
+  • pr-boilerplate-press-0001 — About Lemonade: Lemonade (NYSE: LMND) is a digital insurer built on AI and social impact, offering renters, homeowners, car, pet, and life insurance in the U.S…
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Lemonade, Inc. (NYSE: LMND) today reported strong second-quarter growth, driven by accelerating growth with healthy underwriting and expense discipline. The company's continued focus on operating efficiency improvements enabled it to maintain a strong financial position, positioning it for future growth.
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #12
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "resend_code"
+}
+Duration: 1664ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_resend_code_1 — Resend code
+  • cta_resend_code_2 — Resend Code
+  • cta_resend_code_topup_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Resend Code
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #13
+================================================================================
+Type: press_release
+Parameters: {
+  "audience": "customers",
+  "headline": "Faster claim decisions",
+  "key_message": "more customers get paid in minutes with zero paperwork"
+}
+Duration: 1730ms
+Success: True
+
+SELECTED REFERENCES:
+  • pr-lede-press-0001 — NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) reported second‑quarter results marked by accelerating growth and disciplined underwriting, with contin…
+  • pr-quote-press-0001 — “This quarter’s performance reflects momentum in our car product and European markets, alongside ongoing expense discipline,” said a Lemonade spokesperson.
+  • pr-boilerplate-press-0001 — About Lemonade: Lemonade (NYSE: LMND) is a digital insurer built on AI and social impact, offering renters, homeowners, car, pet, and life insurance in the U.S…
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Lemonade is revolutionizing the way customers receive compensation for claims, now paying out more customers in minutes with zero paperwork required. This significant improvement in processing speed and efficiency is a direct result of our commitment to automation and instant everything, allowing us to provide faster and more transparent claims decisions. With our digital insurer model built on AI and social impact, we're dedicated to giving back to our community through our annual Giveback program, donating unused premiums to nonprofits chosen by our customers.
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #14
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "pay now"
+}
+Duration: 1870ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Pay Now
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #15
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Slack",
+  "title": "roadmap sync moved",
+  "key_update": "product roadmap sync moved to Tuesdays 11:00"
+}
+Duration: 2153ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+We've moved our product roadmap sync to Tuesdays at 11:00. From now on, you can expect to receive updates on the latest developments every Tuesday morning.
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #16
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "explain coverage limit"
+}
+Duration: 1705ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Your coverage limit is the maximum amount we'll pay for a single claim
+
+SCORING:
+----------------------------------------
+TRS Score: 83
+Verdict: pass
+Rules: 25/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #17
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "next"
+}
+Duration: 1693ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_next_1 — Next
+  • cta_next_topup_1 — Next
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Next
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #18
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "submit"
+}
+Duration: 1650ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_submit_1 — Submit
+  • cta_submit_topup_1 — Submit
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Submit
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #19
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "rate_limited"
+}
+Duration: 1626ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_rate_limited_topup_1 — You’re sending too many requests. Wait & retry
+  • err_server_offline_1 — Our servers are offline. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+You've reached your limit
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #20
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "save"
+}
+Duration: 1632ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_save_1 — Save
+  • cta_save_changes_topup_1 — Save changes
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Save
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #21
+================================================================================
+Type: press_release
+Parameters: {
+  "audience": "press",
+  "headline": "Lemonade renews reinsurance program",
+  "key_message": "supports growth while reducing earnings volatility"
+}
+Duration: 1632ms
+Success: True
+
+SELECTED REFERENCES:
+  • pr-lede-press-0001 — NEW YORK — August 5, 2025 — Lemonade, Inc. (NYSE: LMND) reported second‑quarter results marked by accelerating growth and disciplined underwriting, with contin…
+  • pr-quote-press-0001 — “This quarter’s performance reflects momentum in our car product and European markets, alongside ongoing expense discipline,” said a Lemonade spokesperson.
+  • pr-boilerplate-press-0001 — About Lemonade: Lemonade (NYSE: LMND) is a digital insurer built on AI and social impact, offering renters, homeowners, car, pet, and life insurance in the U.S…
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Lemonade renews reinsurance program to support growth while reducing earnings volatility. The digital insurer has renewed its reinsurance program, ensuring continued stability and flexibility as it expands its offerings and enters new markets. This strategic move enables Lemonade to maintain its focus on disciplined underwriting and operating efficiency, while also mitigating the impact of unpredictable market fluctuations on its earnings.
+
+SCORING:
+----------------------------------------
+TRS Score: 88
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 28/40
+
+================================================================================
+TEST CASE #22
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "maintenance_window"
+}
+Duration: 1739ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_maintenance_1 — We’re updating things right now. Retry
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Our maintenance window is currently open
+
+SCORING:
+----------------------------------------
+TRS Score: 80
+Verdict: pass
+Rules: 25/40
+Lexicon: 20/20
+Critic: 35/40
+
+================================================================================
+TEST CASE #23
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Email",
+  "title": "design crit changes",
+  "key_update": "weekly crit now pairs; submit figs by EOD Monday"
+}
+Duration: 1653ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+design crit changes
+
+We've made some changes to our weekly design crit process. Now, it pairs you with a design buddy to provide instant feedback on your work. To continue, please submit your figures by the end of day Monday.
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #24
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "timeout_error"
+}
+Duration: 1939ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_timeout_1 — Request timed out. Retry
+  • err_timeout_topup_1 — That took too long. Retry
+  • err_rate_limited_1 — Too many attempts. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+That took too long
+
+SCORING:
+----------------------------------------
+TRS Score: 92
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 32/40
+
+================================================================================
+TEST CASE #25
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "upload file"
+}
+Duration: 1637ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_upload_file_1 — Upload file
+  • cta_upload_file_2 — Upload File
+  • cta_upload_file_topup_1 — Upload file
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Upload File
+
+SCORING:
+----------------------------------------
+TRS Score: 92
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 32/40
+
+================================================================================
+TEST CASE #26
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "server error"
+}
+Duration: 1642ms
+Success: True
+
+SELECTED REFERENCES:
+  • err_rate_limited_1 — Too many attempts. Retry
+  • err_server_offline_1 — Our servers are offline. Retry
+  • err_timeout_1 — Request timed out. Retry
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Our servers are experiencing technical difficulties
+
+SCORING:
+----------------------------------------
+TRS Score: 77
+Verdict: borderline
+Rules: 25/40
+Lexicon: 20/20
+Critic: 32/40
+
+================================================================================
+TEST CASE #27
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "verify code"
+}
+Duration: 1744ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_verify_code_2 — Verify Code
+  • cta_verify_code_topup_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Verify Code
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #28
+================================================================================
+Type: internal_comms
+Parameters: {
+  "channel": "Slack",
+  "title": "office policy refresh",
+  "key_update": "quiet rooms first-come; new booking rules apply"
+}
+Duration: 1701ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_verify_code_1 — Verify code
+  • cta_confirm_1 — Confirm details
+  • cta_resend_code_1 — Resend code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+We're refreshing our office policy to better support your work-life balance. Starting immediately, quiet rooms will be available on a first-come basis, with new booking rules in place.
+
+SCORING:
+----------------------------------------
+TRS Score: 84
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 24/40
+
+================================================================================
+TEST CASE #29
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "decline"
+}
+Duration: 1621ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_decline_1 — Decline
+  • cta_decline_topup_1 — Decline
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Decline
+
+SCORING:
+----------------------------------------
+TRS Score: 90
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 30/40
+
+================================================================================
+TEST CASE #30
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "button",
+  "surface": "button",
+  "intent": "back"
+}
+Duration: 1630ms
+Success: True
+
+SELECTED REFERENCES:
+  • cta_back_1 — Back
+  • cta_back_topup_1 — Back
+  • cta_verify_code_1 — Verify code
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Back
+
+SCORING:
+----------------------------------------
+TRS Score: 98
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #31
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "password rules"
+}
+Duration: 1986ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Use at least 12 characters, including a number and symbol
+
+SCORING:
+----------------------------------------
+TRS Score: 75
+Verdict: borderline
+Rules: 17/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #32
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "tooltip",
+  "surface": "tooltip",
+  "intent": "why we need this info"
+}
+Duration: 1763ms
+Success: True
+
+SELECTED REFERENCES:
+  • tip_password_1 — Use twelve characters with a number and symbol.
+  • tip_address_1 — Start typing your street—pick a match from the list.
+  • tip_upload_1 — Drag a file here or choose one from your device.
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+We'll use it to verify your identity and keep your account secure
+
+SCORING:
+----------------------------------------
+TRS Score: 79
+Verdict: borderline
+Rules: 21/40
+Lexicon: 20/20
+Critic: 38/40
+
+================================================================================
+TEST CASE #33
+================================================================================
+Type: microcopy
+Parameters: {
+  "uiContext": "error",
+  "surface": "error",
+  "intent": "dns_error"
+}
+Duration: 4683ms
+Success: True
+
+PROMPT SENT TO LLM:
+----------------------------------------
+No prompt found in logs
+
+GENERATED RESULT:
+----------------------------------------
+Couldn't find the DNS server
+
+SCORING:
+----------------------------------------
+TRS Score: 92
+Verdict: pass
+Rules: 40/40
+Lexicon: 20/20
+Critic: 32/40
+

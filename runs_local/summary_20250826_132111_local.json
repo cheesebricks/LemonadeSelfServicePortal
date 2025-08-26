@@ -1,0 +1,30 @@
+{
+  "created_at": "2025-08-26T13:21:13Z",
+  "total_runs": 33,
+  "pass": 30,
+  "borderline": 3,
+  "fail": 0,
+  "by_type": {
+    "press_release": {
+      "count": 6,
+      "pass": 6,
+      "borderline": 0,
+      "fail": 0
+    },
+    "microcopy": {
+      "count": 20,
+      "pass": 17,
+      "borderline": 3,
+      "fail": 0
+    },
+    "internal_comms": {
+      "count": 7,
+      "pass": 7,
+      "borderline": 0,
+      "fail": 0
+    }
+  },
+  "avg_trs": 87.09,
+  "avg_duration_ms": 1824,
+  "429s": 0
+}
