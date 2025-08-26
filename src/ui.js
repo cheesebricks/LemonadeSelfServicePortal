@@ -20,15 +20,7 @@ export function renderForm(type){
       {v:'error', l:'error'},
       {v:'tooltip', l:'tooltip'}
     ], true),
-    rowInput('Intent', 'intent', 'e.g., pay_now', true),
-    // Locale: dropdown with default en-US (Lemonade public markets)
-    rowSelect('Locale', 'locale', [
-      { v: 'en-US', l: 'English (US)' },
-      { v: 'en-GB', l: 'English (UK)' },
-      { v: 'de-DE', l: 'Deutsch (DE)' },
-      { v: 'fr-FR', l: 'Français (FR)' },
-      { v: 'nl-NL', l: 'Nederlands (NL)' }
-    ], true, 'en-US')
+    rowInput('Intent', 'intent', 'e.g., pay_now', true)
   );
 }
 
@@ -66,7 +58,7 @@ export function getParams() {
 export function validate(type){
   const p = getParams();
   if (type === 'microcopy') {
-    return !!(p.uiContext && p.intent && p.locale);
+    return !!(p.uiContext && p.intent);
   }
   if (type === 'press_release') {
     return !!(p.headline && p.keyMessage && p.audience && p.region);

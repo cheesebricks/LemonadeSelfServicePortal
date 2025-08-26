@@ -45,7 +45,6 @@ export function genTemplate_generate({ type, traits, params, refs, preferred, ba
   if (type === 'microcopy') {
     const task =
 `TASK: Generate Microcopy (CTA)
-LOCALE: ${params?.locale || 'en-US'}
 SURFACE: ${params?.surface || 'button'}
 INTENT: ${params?.intent || 'generic'}
 ${refsBlock(refs)}
@@ -98,11 +97,12 @@ OUTPUT: Only the final text.`;
 export function genTemplate_revise({ type, traits, params, refs, preferred, banned, base, fixes = [] }) {
   const sys = [systemCommon(traits), lexiconLines(preferred, banned), noPrefaceGuards()].filter(Boolean).join('\n');
   const fixLines = (fixes || []).map((f, i) => `  ${i + 1}. ${f}`).join('\n');
+  const localeLine = (type === 'microcopy') ? '' : `\nLOCALE: ${params?.locale || 'en-US'}`;
 
   const task =
 `TASK: Revise the text to improve TRS.
 TYPE: ${type}
-LOCALE: ${params?.locale || 'en-US'}
+${localeLine}
 INPUT TEXT:
 """
 ${base}

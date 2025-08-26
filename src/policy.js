@@ -20,8 +20,8 @@ export function getPolicy(contentType) {
     return {
       ...base,
       typeName: "Microcopy",
-      required: ["uiContext", "intent", "locale"],
-      corpus: { matchOn: ["uiContext", "intent", "locale"], refs: 3 },
+      required: ["uiContext", "intent"],
+      corpus: { matchOn: ["uiContext", "intent"], refs: 3 },
       traits: { witty: 0.5, empathetic: 0.5, clear: 1 },
       // Marketing bleed → keep out of CTAs
       bannedWords: [

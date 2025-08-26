@@ -133,7 +133,7 @@ function makeRuleFixes(type, rules) {
 // --- Param normalization + Synonym mapping ---
 function baseNormalize(type, p = {}) {
   const out = { ...p };
-  if (!out.locale) out.locale = 'en-US';
+  if (type !== 'microcopy' && !out.locale) out.locale = 'en-US';
   if (type === 'press_release') {
     if (!out.region) out.region = 'US';
     if (!out.audience) out.audience = 'press';
