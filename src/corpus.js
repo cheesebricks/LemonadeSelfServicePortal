@@ -24,7 +24,7 @@ export async function loadCorpusWithLexicon(policy) {
     ]);
 
     const banned_lexicon = dedupe([
-      ...(corpus.banned_phrases || []),
+      ...(corpus.banned_phrases || corpus.banned_lexicon || []),
       ...(global.banned || [])
     ]);
 

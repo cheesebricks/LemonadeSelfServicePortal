@@ -21,7 +21,7 @@ export function getPolicy(contentType) {
       ...base,
       typeName: "Microcopy",
       required: ["uiContext", "intent"],
-      corpus: { matchOn: ["uiContext", "intent"], refs: 3 },
+      corpus: { file: 'corpus/microcopy_corpus.json', matchOn: ["uiContext", "intent"], refs: 3 },
       traits: { witty: 0.5, empathetic: 0.5, clear: 1 },
       // Marketing bleed → keep out of CTAs
       bannedWords: [
@@ -64,7 +64,7 @@ export function getPolicy(contentType) {
       ...base,
       typeName: "PR / External",
       required: ["headline", "key_message", "audience", "locale"],
-      corpus: { matchOn: ["audience", "locale"], refs: 3 },
+      corpus: { file: 'corpus/press_release_corpus.json', matchOn: ["audience", "locale"], refs: 3 },
       traits: { witty: 0.2, empathetic: 0.5, clear: 1 },
       prefer: ["transparent pricing", "customers", "community"],
       // PR: avoid consumer CTAs

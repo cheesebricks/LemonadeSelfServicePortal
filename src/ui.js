@@ -30,8 +30,8 @@ export function renderForm(type){
       rowInput('Key message', 'keyMessage', 'What’s the gist?', true),
       rowSelect('Audience', 'audience', [
         {v:'press', l:'press'},
-        {v:'customers', l:'customers'},
-        {v:'investors', l:'investors'}
+        {v:'customer', l:'customer'},
+        {v:'investor', l:'investor'}
       ], true)
     );
   }
