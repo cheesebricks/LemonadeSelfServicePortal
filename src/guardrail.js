@@ -123,7 +123,7 @@ async function criticScore(text, contentType, params = {}) {
     } else if (uiContext === 'error') {
       rubric = `Evaluate empathy, helpfulness, clarity (1 sentence max), and absence of technical jargon.`;
     } else if (uiContext === 'tooltip') {
-      rubric = `Evaluate helpfulness and informativeness. Tooltips should be 1-2 sentences that explain the purpose or benefit. Be lenient - if the text is helpful and informative, score it well.`;
+      rubric = `Evaluate helpfulness and informativeness. Tooltips should be 1-2 sentences that explain the purpose or benefit. Score 30-40 if the text is helpful and informative, even if it could be slightly more concise. Be very lenient.`;
     } else {
       rubric = `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`;
     }
