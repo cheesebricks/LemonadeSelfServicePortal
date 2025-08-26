@@ -100,14 +100,32 @@ export function validateRequired(type, params = {}) {
 
 export function getTraits(type, params = {}) {
   const p = getPolicy(type);
-  // No audience-based tweaks for Internal Comms anymore
+  
+  // Microcopy: Different traits based on UI context
+  if (type === "microcopy") {
+    const uiContext = String(params.uiContext || '').toLowerCase();
+    
+    if (uiContext === 'error') {
+      return { witty: 0.1, empathetic: 0.9, clear: 1 }; // Empathetic, helpful, short
+    }
+    if (uiContext === 'button') {
+      return { witty: 0.2, empathetic: 0.3, clear: 1 }; // Direct, simple, short
+    }
+    if (uiContext === 'tooltip') {
+      return { witty: 0.3, empathetic: 0.6, clear: 1 }; // Helpful, contextual, longer
+    }
+    // Default for other contexts
+    return { witty: 0.5, empathetic: 0.5, clear: 1 };
+  }
+  
   // Tailor PR / External tone by audience
   if (type === "press_release") {
     const aud = String(params.audience || '').toLowerCase();
     if (aud === 'press') return { witty: 0.2, empathetic: 0.5, clear: 1 };
-    if (aud === 'customer') return { witty: 0.3, empathetic: 0.6, clear: 1 };
-    if (aud === 'investor') return { witty: 0.1, empathetic: 0.3, clear: 1 };
+    if (aud === 'customers') return { witty: 0.3, empathetic: 0.6, clear: 1 };
+    if (aud === 'investors') return { witty: 0.1, empathetic: 0.3, clear: 1 };
   }
+  
   return p.traits;
 }
 

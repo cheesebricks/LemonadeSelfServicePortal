@@ -43,17 +43,39 @@ export function genTemplate_generate({ type, traits, params, refs, preferred, ba
   const sys = [systemCommon(traits), lexiconLines(preferred, banned), noPrefaceGuards()].filter(Boolean).join('\n');
 
   if (type === 'microcopy') {
+    const uiContext = params?.uiContext || 'button';
+    let contextRequirements = '';
+    
+    if (uiContext === 'error') {
+      contextRequirements = `
+ERROR MESSAGE REQUIREMENTS:
+- Short (1 sentence max), empathetic, helpful, suggestive
+- Be understanding and offer a solution or next step
+- Avoid technical jargon, keep it user-friendly`;
+    } else if (uiContext === 'button') {
+      contextRequirements = `
+BUTTON REQUIREMENTS:
+- Short (≤ 5 words), direct, simple, action-first
+- Prefer "Next" over "Next step", "Continue" over "Continue to next page"
+- No unnecessary words or qualifiers`;
+    } else if (uiContext === 'tooltip') {
+      contextRequirements = `
+TOOLTIP REQUIREMENTS:
+- Longer (1-2 sentences), helpful, contextual
+- Explain the purpose or benefit related to the object
+- Provide useful information that enhances understanding`;
+    }
+    
     const task =
-`TASK: Generate Microcopy (CTA)
-SURFACE: ${params?.surface || 'button'}
+`TASK: Generate Microcopy
+UI CONTEXT: ${uiContext}
+SURFACE: ${params?.surface || uiContext}
 INTENT: ${params?.intent_canonical || params?.intent || 'generic'}
 ${refsBlock(refs)}
-REQUIREMENTS:
-- ≤ 5 words, action-first verb.
-- No "and", no punctuation junk.
-- No quotes around the whole CTA.
-- Use only words essential to the INTENT; avoid adding adverbs like "instantly" or qualifiers unless present in INTENT.
-OUTPUT: Only the final CTA.`;
+REQUIREMENTS:${contextRequirements}
+- Use only words essential to the INTENT; avoid adding adverbs or qualifiers unless present in INTENT.
+- No quotes around the text.
+OUTPUT: Only the final text.`;
     return { system: sys, user: task };
   }
 
@@ -102,13 +124,23 @@ export function genTemplate_revise({ type, traits, params, refs, preferred, bann
   const fixLines = (fixes || []).map((f, i) => `  ${i + 1}. ${f}`).join('\n');
   const localeLine = (type === 'microcopy') ? '' : `\nLOCALE: ${params?.locale || 'en-US'}`;
 
-  const internalFormat = (type === 'internal_comms')
-    ? `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`
-    : '';
+  let contextFormat = '';
+  if (type === 'internal_comms') {
+    contextFormat = `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`;
+  } else if (type === 'microcopy') {
+    const uiContext = params?.uiContext || 'button';
+    if (uiContext === 'error') {
+      contextFormat = `\nUI CONTEXT: Error message\nFORMAT RULES:\n- Short (1 sentence max), empathetic, helpful, suggestive\n- Be understanding and offer a solution or next step\n- Avoid technical jargon, keep it user-friendly`;
+    } else if (uiContext === 'button') {
+      contextFormat = `\nUI CONTEXT: Button\nFORMAT RULES:\n- Short (≤ 5 words), direct, simple, action-first\n- Prefer "Next" over "Next step", "Continue" over "Continue to next page"\n- No unnecessary words or qualifiers`;
+    } else if (uiContext === 'tooltip') {
+      contextFormat = `\nUI CONTEXT: Tooltip\nFORMAT RULES:\n- Longer (1-2 sentences), helpful, contextual\n- Explain the purpose or benefit related to the object\n- Provide useful information that enhances understanding`;
+    }
+  }
 
   const task =
 `TASK: Revise the text to improve TRS.
-TYPE: ${type}${internalFormat}
+TYPE: ${type}${contextFormat}
 ${localeLine}
 INPUT TEXT:
 """
