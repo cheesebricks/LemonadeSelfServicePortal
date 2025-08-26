@@ -38,7 +38,7 @@ function round(n, p = 1) {
  *    - Remove "Here is/Here's/Below is/Internal comms announcement:" etc.
  *    - Return clean prose (no fences, no labels)
  */
-export function enforceOutputShape(type, text) {
+export function enforceOutputShape(type, text, params = {}) {
   let t = String(text || '').trim();
 
   // 1) Strip code fences, markdown headings, extra whitespace
@@ -62,15 +62,33 @@ export function enforceOutputShape(type, text) {
     // Remove lingering scaffolding again
     t = stripScaffolding(t);
 
-    // Make it a short CTA: ≤5 words, no trailing punctuation, no quotes
-    t = t.replace(/^["'“”‘’]+|["'“”‘’]+$/g, '').trim();
-    const words = t.split(/\s+/).filter(Boolean);
-    t = words.slice(0, 5).join(' ');
-
-    // Clean end punctuation and connectors that often leak from longer sentences
-    t = t.replace(/[.!?…,:;]+$/g, '').replace(/\s+and\s*$/i, '').trim();
-    // Normalize case for single-word OK/Okay etc.
-    t = t.replace(/^okay$/i, 'OK');
+    // Remove quotes and clean up
+    t = t.replace(/^["'"'']+|["'"'']+$/g, '').trim();
+    
+    // Apply context-specific shaping
+    const uiContext = params?.uiContext || 'button';
+    
+    if (uiContext === 'button') {
+      // Button: Short (≤5 words), direct, simple
+      const words = t.split(/\s+/).filter(Boolean);
+      t = words.slice(0, 5).join(' ');
+      // Clean end punctuation and connectors
+      t = t.replace(/[.!?…,:;]+$/g, '').replace(/\s+and\s*$/i, '').trim();
+      // Normalize case for single-word OK/Okay etc.
+      t = t.replace(/^okay$/i, 'OK');
+    } else if (uiContext === 'error') {
+      // Error: Short (1 sentence max), empathetic, helpful
+      const sentences = t.split(/[.!?]+/).filter(s => s.trim().length > 0);
+      t = sentences[0]?.trim() || t;
+      // Clean up but keep helpful punctuation
+      t = t.replace(/[,…;]+$/g, '').trim();
+    } else if (uiContext === 'tooltip') {
+      // Tooltip: Longer (1-2 sentences), helpful, contextual
+      // Don't truncate - let the full helpful content through
+      // Just clean up excessive punctuation
+      t = t.replace(/[,…;]+$/g, '').trim();
+    }
+    
     return t;
   }
 

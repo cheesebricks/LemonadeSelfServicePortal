@@ -318,7 +318,7 @@ export async function runPipeline({ type, params, onLog }) {
     push(`✅ Model #1 replied in ~${g1.latency_ms ?? '?'}ms.`);
     push(`📝 Candidate #1 (raw): “${snip(g1.text)}”`);
 
-    let tBest = enforceOutputShape(type, g1.text);
+    let tBest = enforceOutputShape(type, g1.text, params);
     if (tBest !== g1.text) push('🧱 Enforced output shape.');
     push(`📝 Candidate #1 (shaped): “${snip(tBest)}”`);
 
@@ -373,7 +373,7 @@ export async function runPipeline({ type, params, onLog }) {
       push(`✅ Model #${i} replied in ~${gR.latency_ms ?? '?'}ms.`);
       push(`📝 Candidate #${i} (raw): “${snip(gR.text)}”`);
 
-      const tR = enforceOutputShape(type, gR.text);
+      const tR = enforceOutputShape(type, gR.text, params);
       if (tR !== gR.text) push('🧱 Enforced output shape (revise).');
       push(`📝 Candidate #${i} (shaped): “${snip(tR)}”`);
 
