@@ -109,17 +109,29 @@ function lexiconScore(text, contentType, inputs, policy) {
 }
 
 // ---------- Critic (max 40) ----------
-async function criticScore(text, contentType) {
+async function criticScore(text, contentType, params = {}) {
   const system =
     `You are a rigorous writing critic for an insurance brand.\n` +
     `Return STRICT JSON only: {"score": <0..40>, "detail": "<short>"}.\n` +
     `No prose, no preface, no fences.`;
 
-  const rubric = (contentType === "microcopy")
-    ? `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`
-    : (contentType === "internal_comms")
-      ? `Evaluate clarity, first-sentence relevance to title+key update, professional tone, and absence of marketing fluff.`
-      : `Evaluate factual tone, presence of headline/key-message keywords, no CTA, professional style.`;
+  let rubric;
+  if (contentType === "microcopy") {
+    const uiContext = params?.uiContext || 'button';
+    if (uiContext === 'button') {
+      rubric = `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`;
+    } else if (uiContext === 'error') {
+      rubric = `Evaluate empathy, helpfulness, clarity (1 sentence max), and absence of technical jargon.`;
+    } else if (uiContext === 'tooltip') {
+      rubric = `Evaluate helpfulness, contextual relevance, informativeness (1-2 sentences), and clear explanation.`;
+    } else {
+      rubric = `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`;
+    }
+  } else if (contentType === "internal_comms") {
+    rubric = `Evaluate clarity, first-sentence relevance to title+key update, professional tone, and absence of marketing fluff.`;
+  } else {
+    rubric = `Evaluate factual tone, presence of headline/key-message keywords, no CTA, professional style.`;
+  }
 
   const user = `TYPE: ${contentType}\nTEXT:\n${text}\n\nRUBRIC: ${rubric}\nOUTPUT: {"score": <0..40>, "detail": "…"}`;
 
@@ -185,7 +197,7 @@ export async function score(args = {}) {
 
   const rules  = rulesScore(text, contentType, inputs, policy);
   const lexicon= lexiconScore(text, contentType, inputs, policy);
-  const critic = await criticScore(text, contentType);
+  const critic = await criticScore(text, contentType, inputs);
 
   const trs = clamp(Math.round(rules + lexicon + critic.score), 0, 100);
   const verdict = trs >= PASS ? "pass" : (trs >= BORDER ? "borderline" : "fail");
