@@ -44,11 +44,11 @@ def run_baseline_test():
     cmd = [
         sys.executable, "browser_runner.py",
         "--url", "http://localhost:8001/index.html",
-        "--batch-size", "11",
-        "--delay-between-cases", "2",
-        "--delay-between-batches", "20",
-        "--output-dir", output_dir,
-        "--verbose"
+        "--batch_size", "11",
+        "--delay_ms", "2000",
+        "--batch_pause_ms", "20000",
+        "--out_dir", output_dir,
+        "--headful"
     ]
     
     print(f"📋 Running command: {' '.join(cmd)}")
