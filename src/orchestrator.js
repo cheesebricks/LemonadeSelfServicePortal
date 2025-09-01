@@ -10,7 +10,8 @@ import { generateText } from './llmClient.js';
 import { loadCorpusWithLexicon, pickRefs } from './corpus.js';
 import { score as scoreTRS } from './guardrail.js';
 
-const MAX_TRIES = 4;
+const MAX_TRIES = 6;
+const MAX_DURATION_MS = 5000; // 5 second timeout
 
 // --- Dev verbose toggle ---
 function isVerbose() {
@@ -93,41 +94,66 @@ function scoringLine(tag, s) {
   return `${tag} TRS = ${s.trs} — rules ${rules}/40, lexicon ${lex}/20, critic ${crit}/40 → ${String(s.verdict || '').toUpperCase()}`;
 }
 
-function makeRuleFixes(type, rules) {
+function makeSmartFixes(type, scoring, params) {
   const fixes = [];
-  for (const rawKey of (rules?.fails || [])) {
-    const key = String(rawKey).replace(/\(.*\)$/, '');
-    switch (key) {
-      case 'contractions':
-        fixes.push(`Use contractions ("we're", "it's", "you’re").`); break;
-      case 'sentence_length':
-        fixes.push(type === 'microcopy'
-          ? 'Keep CTA ≤ 5 words; keep sentences ultra-short.'
-          : 'Aim for average sentence length 12–20 words.'); break;
-      case 'punctuation':
-        fixes.push('Avoid ellipses and repeated punctuation (!!, ???).'); break;
-      case 'readability':
-        fixes.push(type === 'microcopy'
-          ? 'Target Flesch ≥ 70 (simpler wording).'
-          : 'Target Flesch 45–65 (professional, not too dense).'); break;
-      case 'pronouns':
-        fixes.push('Prefer friendly “you”/“we” where appropriate.'); break;
-      case 'type_specific':
-        fixes.push(type === 'microcopy'
-          ? 'Respect microcopy conventions (CTA focused, ≤ 5 words).'
-          : 'No slang/emoji; follow press release structure and tone.'); break;
-      case 'no_emoji':
-      case 'no_slang':
-        fixes.push('Remove slang and emoji.'); break;
-      case 'scaffolding':
-        fixes.push('Remove scaffolding like “Here’s the revised text:” and rubric notes.'); break;
-      case 'relevance_missing':
-        fixes.push('Include Title/Key Update/Topic keywords explicitly in the first sentence.'); break;
-      default:
-        fixes.push(`Fix: ${key}.`);
+  const { breakdown } = scoring;
+  
+  // Rules-based fixes (40 points max)
+  if (breakdown?.rules?.score < 30) {
+    if (type === 'microcopy') {
+      const uiContext = params?.uiContext || 'button';
+      if (uiContext === 'button') {
+        fixes.push('Keep button text ≤5 words, action-focused, no unnecessary qualifiers.');
+      } else if (uiContext === 'tooltip') {
+        fixes.push('Keep tooltip to 1 sentence max, ≤15 words, directly answer the user question.');
+      } else if (uiContext === 'error') {
+        fixes.push('Make error message 1 sentence max, empathetic, and suggest a solution.');
+      }
+    } else if (type === 'internal_comms') {
+      fixes.push('Include key words from title and update in the first sentence.');
+    } else if (type === 'press_release') {
+      fixes.push('Include headline and key message keywords in the text.');
     }
   }
-  return fixes;
+  
+  // Lexicon-based fixes (20 points max)
+  if (breakdown?.lexicon?.score < 15) {
+    fixes.push('Use more preferred brand words (instant, transparent pricing, we\'ve got you, automation, AI-native).');
+    fixes.push('Avoid banned words (ASAP, btw, lol, pls, emoji, actuarial jargon).');
+  }
+  
+  // Critic-based fixes (40 points max)
+  if (breakdown?.critic?.score < 25) {
+    const criticDetail = breakdown?.critic?.detail || '';
+    if (type === 'microcopy') {
+      const uiContext = params?.uiContext || 'button';
+      if (uiContext === 'button') {
+        fixes.push('Make button text more actionable and direct. Remove unnecessary words.');
+      } else if (uiContext === 'tooltip') {
+        fixes.push('Make tooltip more helpful and informative. Focus on answering "why" or "what" directly.');
+      } else if (uiContext === 'error') {
+        fixes.push('Make error message more empathetic and helpful. Suggest what the user should do next.');
+      }
+    } else if (type === 'internal_comms') {
+      fixes.push('Make the message clearer and more relevant to the title and key update.');
+    } else if (type === 'press_release') {
+      fixes.push('Use more professional, factual tone. Avoid consumer marketing language.');
+    }
+    
+    if (criticDetail.includes('brief') || criticDetail.includes('concise')) {
+      fixes.push('Be more concise - remove unnecessary words and phrases.');
+    }
+    if (criticDetail.includes('clarity') || criticDetail.includes('clear')) {
+      fixes.push('Improve clarity - use simpler, more direct language.');
+    }
+  }
+  
+  // Overall TRS-based guidance
+  if (scoring.trs < 75) {
+    fixes.push('Focus on Lemonade\'s friendly, clear, compassionate voice. Be airy and concise.');
+  }
+  
+  return fixes.length > 0 ? fixes : ['Improve overall quality, clarity, and brand voice alignment.'];
 }
 
 // --- Param normalization + Synonym mapping ---
@@ -340,7 +366,14 @@ export async function runPipeline({ type, params, onLog }) {
 
     // 4) Iterative TRS-driven revise loop (for FAIL and BORDERLINE)
     for (let i = 2; i <= MAX_TRIES && (sBest.verdict === 'fail' || sBest.verdict === 'borderline'); i++) {
-      const fixes = makeRuleFixes(type, sBest.rules);
+      // Check time limit - but allow current iteration to finish
+      const elapsed = Date.now() - startedAt;
+      if (elapsed > MAX_DURATION_MS) {
+        push(`⏰ Time limit reached (${elapsed}ms), stopping after attempt #${i-1}.`);
+        break;
+      }
+      
+      const fixes = makeSmartFixes(type, sBest, params);
 
       const tplR = genTemplate_revise({
         type,
@@ -386,15 +419,27 @@ export async function runPipeline({ type, params, onLog }) {
       push(`🧮 ${scoringLine(`#${i}`, sR)}`);
       attempts.push(attemptMeta(`revise#${i - 1}`, sR, gR.latency_ms));
 
-      if (sR.trs >= sBest.trs) { tBest = tR; sBest = sR; }
+      // Always keep the best result (highest TRS score)
+      if (sR.trs > sBest.trs) { 
+        const improvement = sR.trs - sBest.trs;
+        tBest = tR; 
+        sBest = sR; 
+        push(`📈 New best: TRS ${sR.trs} (improved by +${improvement} points)`);
+      }
       if (sBest.verdict === 'pass') break;
     }
 
     const duration_ms = Date.now() - startedAt;
-    if (sBest.verdict !== 'fail') {
-      push(`🏁 Using best (improved to ${String(sBest.verdict).toUpperCase()}).`);
+    const finalTRS = sBest.trs;
+    const initialTRS = attempts[0]?.trs || 0;
+    const improvement = finalTRS - initialTRS;
+    
+    if (sBest.verdict === 'pass') {
+      push(`🏁 SUCCESS: Achieved PASS with TRS ${finalTRS} (${improvement > 0 ? `+${improvement}` : improvement} from initial) in ${duration_ms}ms.`);
+    } else if (sBest.verdict === 'borderline') {
+      push(`🏁 BORDERLINE: Best TRS ${finalTRS} (${improvement > 0 ? `+${improvement}` : improvement} from initial) in ${duration_ms}ms.`);
     } else {
-      push(`🏁 Stopped after ${attempts.length} attempts (still FAIL) in ${duration_ms}ms.`);
+      push(`🏁 FAIL: Best TRS ${finalTRS} after ${attempts.length} attempts (${improvement > 0 ? `+${improvement}` : improvement} improvement) in ${duration_ms}ms.`);
     }
 
     return { ok: true, log, policy, result: tBest, scoring: sBest, attempts, duration_ms };
