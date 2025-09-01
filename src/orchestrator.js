@@ -110,7 +110,44 @@ function makeSmartFixes(type, scoring, params) {
         fixes.push('Make error message 1 sentence max, empathetic, and suggest a solution.');
       }
     } else if (type === 'internal_comms') {
-      fixes.push('Include key words from title and update in the first sentence.');
+      // Provide specific feedback based on semantic matches
+      if (params?._semanticMatches) {
+        const missingKeywords = [];
+        const semanticHints = [];
+        
+        // Check what keywords are missing
+        const titleWords = (params.title || '').split(/\s+/).filter(w => w.length >= 2);
+        const updateWords = (params.key_update || '').split(/\s+/).filter(w => w.length >= 2);
+        const allKeywords = [...titleWords, ...updateWords];
+        
+        for (const keyword of allKeywords) {
+          const found = params._semanticMatches.find(m => m.keyword === keyword);
+          if (!found) {
+            missingKeywords.push(keyword);
+          }
+        }
+        
+        if (missingKeywords.length > 0) {
+          fixes.push(`Include these specific words in the first sentence: ${missingKeywords.slice(0, 3).join(', ')}`);
+        }
+        
+        // Add semantic hints
+        if (missingKeywords.includes('dogs') && !params._semanticMatches.some(m => m.keyword === 'dogs')) {
+          semanticHints.push('Use "no dogs" or "dog-free" explicitly');
+        }
+        if (missingKeywords.includes('scare') && !params._semanticMatches.some(m => m.keyword === 'scare')) {
+          semanticHints.push('Mention the specific concern about "scaring" or "fear"');
+        }
+        if (missingKeywords.includes('devops') && !params._semanticMatches.some(m => m.keyword === 'devops')) {
+          semanticHints.push('Specifically mention "devops team" or "developers"');
+        }
+        
+        if (semanticHints.length > 0) {
+          fixes.push(`Semantic guidance: ${semanticHints.join('; ')}`);
+        }
+      } else {
+        fixes.push('Include key words from title and update in the first sentence.');
+      }
     } else if (type === 'press_release') {
       fixes.push('Include headline and key message keywords in the text.');
     }
