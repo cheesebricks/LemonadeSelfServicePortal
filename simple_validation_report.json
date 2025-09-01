@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "total_tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "success_rate": 100.0,
+    "average_score": 100.0
+  },
+  "common_issues": {},
+  "detailed_results": [
+    {
+      "test_case": {
+        "name": "Slack Internal Comms - CEO Announcement",
+        "type": "internal_comms",
+        "input": {
+          "channel": "Slack",
+          "title": "God joins as CEO",
+          "key_update": "new CEO, will make a lot of changes. will introduce new coffee in kitchen."
+        }
+      },
+      "expected_result": {
+        "content": "Welcome God joins as CEO! new CEO, will make a lot of changes. will introduce new coffee in kitchen.",
+        "format": "slack",
+        "length": "short",
+        "has_title_header": false,
+        "channel_specific": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "test_case": {
+        "name": "Email Internal Comms - Office Update",
+        "type": "internal_comms",
+        "input": {
+          "channel": "Email",
+          "title": "New Office Policy",
+          "key_update": "dogs are no longer allowed in the office due to devops team concerns"
+        }
+      },
+      "expected_result": {
+        "content": "New Office Policy\n\ndogs are no longer allowed in the office due to devops team concerns",
+        "format": "email",
+        "length": "longer",
+        "has_title_header": true,
+        "channel_specific": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "test_case": {
+        "name": "Press Release - Product Launch",
+        "type": "press_release",
+        "input": {
+          "headline": "Lemonade Launches AI-Powered Claims",
+          "key_message": "instant claims processing with 99% accuracy"
+        }
+      },
+      "expected_result": {
+        "content": "Lemonade announces Lemonade Launches AI-Powered Claims. instant claims processing with 99% accuracy",
+        "format": "press_release",
+        "has_keywords": true,
+        "tone": "professional",
+        "relevant": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "test_case": {
+        "name": "Microcopy Button - Pay Now",
+        "type": "microcopy",
+        "input": {
+          "intent": "pay now",
+          "uiContext": "button"
+        }
+      },
+      "expected_result": {
+        "content": "pay now",
+        "format": "microcopy",
+        "ui_context": "button",
+        "length": "short",
+        "word_count": 2,
+        "intent_match": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "test_case": {
+        "name": "Microcopy Tooltip - Help Text",
+        "type": "microcopy",
+        "input": {
+          "intent": "how to file a claim",
+          "uiContext": "tooltip"
+        }
+      },
+      "expected_result": {
+        "content": "Learn how to how to file a claim",
+        "format": "microcopy",
+        "ui_context": "tooltip",
+        "sentence_count": 1,
+        "helpful": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "test_case": {
+        "name": "Content Drift Prevention - Coffee Policy",
+        "type": "internal_comms",
+        "input": {
+          "channel": "Slack",
+          "title": "Coffee Machine Broken",
+          "key_update": "coffee machine in kitchen is out of order until tomorrow"
+        }
+      },
+      "expected_result": {
+        "content": "Welcome Coffee Machine Broken! coffee machine in kitchen is out of order until tomorrow",
+        "format": "slack",
+        "length": "short",
+        "has_title_header": false,
+        "channel_specific": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "test_case": {
+        "name": "Dual Channel Prevention - No Mixed Output",
+        "type": "internal_comms",
+        "input": {
+          "channel": "Slack",
+          "title": "Team Meeting",
+          "key_update": "weekly team meeting moved to 3pm"
+        }
+      },
+      "expected_result": {
+        "content": "Welcome Team Meeting! weekly team meeting moved to 3pm",
+        "format": "slack",
+        "length": "short",
+        "has_title_header": false,
+        "channel_specific": true
+      },
+      "analysis": {
+        "score": 100,
+        "issues": [],
+        "overall_pass": true,
+        "tests": {
+          "content_relevance": true,
+          "channel_alignment": true,
+          "single_channel": true,
+          "format_compliance": true
+        }
+      },
+      "passed": true
+    }
+  ]
+}

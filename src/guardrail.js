@@ -108,6 +108,18 @@ function rulesScore(text, contentType, inputs, policy) {
     const lex = (policy?.intentLexicon && policy.intentLexicon[inputs?.intent]) || { preferred: [] };
     const verbs = Array.isArray(lex.preferred) ? lex.preferred : [];
     if (verbs.length && !containsAnySpaced(L, verbs)) s -= 6;
+    
+    // Additional penalty for generic content that doesn't match intent
+    const genericPhrases = [
+      'click here', 'learn more', 'get started', 'find out', 'discover',
+      'explore', 'see details', 'view more', 'read more'
+    ];
+    const hasGenericContent = genericPhrases.some(phrase => 
+      L.includes(phrase.toLowerCase())
+    );
+    if (hasGenericContent && !containsAnySpaced(L, verbs)) {
+      s -= 8; // Penalty for generic content without intent-specific verbs
+    }
   }
 
   if (contentType === "internal_comms") {
@@ -120,6 +132,18 @@ function rulesScore(text, contentType, inputs, policy) {
       s -= 10;
       // Store semantic matches for better feedback
       if (inputs) inputs._semanticMatches = matchResult.semanticMatches;
+    }
+    
+    // Additional penalty for generic corporate content
+    const genericPhrases = [
+      'company', 'organization', 'team', 'we are committed', 'our mission',
+      'we strive', 'we believe', 'we value', 'we are dedicated'
+    ];
+    const hasGenericContent = genericPhrases.some(phrase => 
+      t.toLowerCase().includes(phrase.toLowerCase())
+    );
+    if (hasGenericContent && matchResult.hits < 3) {
+      s -= 8; // Penalty for generic content without sufficient specific keywords
     }
   }
 
@@ -185,20 +209,20 @@ async function criticScore(text, contentType, params = {}) {
   if (contentType === "microcopy") {
     const uiContext = params?.uiContext || 'button';
     if (uiContext === 'button') {
-      rubric = `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`;
+      rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: clarity, actionability, appropriate length, professional tone. Score 0-10 for poor writing style (unclear, too long, unprofessional). Score 30-40 for excellent writing style (clear, concise, professional). Do NOT judge content validity - only evaluate how well it's written.`;
     } else if (uiContext === 'error') {
-      rubric = `Evaluate clarity and helpfulness. Error messages should be clear, empathetic, and helpful (1 sentence max). Score 30-40 if the text clearly explains the issue and is user-friendly, even if it uses some technical terms. Be lenient.`;
+      rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: empathy, helpfulness, clarity, appropriate length. Score 0-10 for poor writing style (unclear, too long, not empathetic). Score 30-40 for excellent writing style (clear, empathetic, helpful). Do NOT judge content validity - only evaluate how well it's written.`;
     } else if (uiContext === 'tooltip') {
-      rubric = `Evaluate helpfulness and informativeness. Tooltips should be 1-2 sentences that explain the purpose or benefit. Score 30-40 if the text is helpful and informative, even if it could be slightly more concise. Be very lenient.`;
+      rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: helpfulness, clarity, conciseness, appropriate length. Score 0-10 for poor writing style (unclear, too long, not helpful). Score 30-40 for excellent writing style (clear, helpful, concise). Do NOT judge content validity - only evaluate how well it's written.`;
     } else {
-      rubric = `Evaluate brevity (≤5 words), actionability, plain language, and absence of meta-preface.`;
+      rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: clarity, actionability, appropriate length, professional tone. Score 0-10 for poor writing style (unclear, too long, unprofessional). Score 30-40 for excellent writing style (clear, concise, professional). Do NOT judge content validity - only evaluate how well it's written.`;
     }
   } else if (contentType === "internal_comms") {
-    rubric = `Evaluate clarity, first-sentence relevance to title+key update, professional tone, and absence of marketing fluff.`;
+    rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: professional tone, clear structure, appropriate formatting, brand voice consistency. Score 0-10 for poor writing style (unclear, unprofessional tone, bad formatting). Score 30-40 for excellent writing style (clear, professional, well-structured). Do NOT judge content validity or business appropriateness - only evaluate how well it's written and presented.`;
   } else if (contentType === "press_release") {
-    rubric = `CRITICAL: Evaluate content relevance to the specific announcement. The text MUST directly address the headline and key message details. Score 0-10 if the content is generic insurance marketing with no connection to the specific news. Score 30-40 only if it directly incorporates the headline and key message content. Be very strict about relevance.`;
+    rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: professional tone, clear structure, appropriate formatting, brand voice consistency. Score 0-10 for poor writing style (unclear, unprofessional tone, bad formatting). Score 30-40 for excellent writing style (clear, professional, well-structured). Do NOT judge content validity or business appropriateness - only evaluate how well it's written and presented.`;
   } else {
-    rubric = `Evaluate factual tone, presence of headline/key-message keywords, no CTA, professional style.`;
+    rubric = `Evaluate ONLY the writing style and presentation quality. Score based on: professional tone, clear structure, appropriate formatting. Score 0-10 for poor writing style (unclear, unprofessional tone, bad formatting). Score 30-40 for excellent writing style (clear, professional, well-structured). Do NOT judge content validity - only evaluate how well it's written.`;
   }
 
   const user = `TYPE: ${contentType}\nTEXT:\n${text}\n\nRUBRIC: ${rubric}\nOUTPUT: {"score": <0..40>, "detail": "…"}`;

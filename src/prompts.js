@@ -22,7 +22,7 @@ TRAITS: witty(${tw}), empathetic(${te}), clear(${tc}).`;
 function noPrefaceGuards(extra = '') {
   return [
     `GUARDS:`,
-    `- Return ONLY the final text. No prefaces like "Here is...", "Here’s...", "Below is...", "Internal comms announcement:", "Press release:".`,
+    `- Return ONLY the final text. No prefaces like "Here is...", "Here's...", "Below is...", "Internal comms announcement:", "Press release:".`,
     `- No labels (Task:, Output:, Draft:).`,
     `- No code fences or markdown headings.`,
     extra || ''
@@ -74,7 +74,10 @@ SURFACE: ${params?.surface || uiContext}
 INTENT: ${params?.intent_canonical || params?.intent || 'generic'}
 ${refsBlock(refs)}
 REQUIREMENTS:${contextRequirements}
+- CRITICAL: The generated content MUST directly address and match the specific INTENT.
 - Use only words essential to the INTENT; avoid adding adverbs or qualifiers unless present in INTENT.
+- Do NOT generate generic content that could apply to any intent.
+- The output should be immediately recognizable as addressing the requested INTENT.
 - No quotes around the text.
 OUTPUT: Only the final text.`;
     return { system: sys, user: task };
@@ -92,12 +95,18 @@ ${refsBlock(refs)}
 REQUIREMENTS:
 - If CHANNEL is Slack: Keep it to 1–2 short lines; crisp; no emoji or slang. DO NOT include the title as a header - start directly with the message content.
 - If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body; professional, friendly.
+- CRITICAL: Focus on the specific update details, not general company information.
+- The message should directly address and incorporate the title and key update content.
 - Include at least 2 of: ${keywordList(params?.title, params?.key_update)} in the first sentence/paragraph.
-- Produce exactly ONE message for the specified CHANNEL only — do not include content for any other channel.
+- Do NOT generate generic corporate messaging or company boilerplate.
+- CRITICAL: Generate EXACTLY ONE message for the specified CHANNEL only.
+- Do NOT include content for any other channel.
 - Do NOT include channel prefixes or labels like "Slack:" or "Email:".
 - Do NOT mention the channel name in the output.
+- Do NOT generate multiple formats or multiple messages.
+- Do NOT create a combined Slack+Email response.
 ${noPrefaceGuards('')}
-OUTPUT: Only the final text.`;
+OUTPUT: Only the final text for the specified channel.`;
     return { system: sys, user: task };
   }
 
@@ -128,32 +137,53 @@ export function genTemplate_revise({ type, traits, params, refs, preferred, bann
   const fixLines = (fixes || []).map((f, i) => `  ${i + 1}. ${f}`).join('\n');
   const localeLine = (type === 'microcopy') ? '' : `\nLOCALE: ${params?.locale || 'en-US'}`;
 
+  // CRITICAL: Include original user request context to prevent content drift
+  let originalContext = '';
+  if (type === 'internal_comms') {
+    originalContext = `\nORIGINAL REQUEST:\nTITLE: ${params?.title || ''}\nKEY UPDATE: ${params?.key_update || ''}\nCHANNEL: ${params?.channel || 'Slack'}`;
+  } else if (type === 'press_release') {
+    originalContext = `\nORIGINAL REQUEST:\nHEADLINE: ${params?.headline || ''}\nKEY MESSAGE: ${params?.key_message || ''}\nAUDIENCE: ${params?.audience || 'press'}`;
+  } else if (type === 'microcopy') {
+    originalContext = `\nORIGINAL REQUEST:\nINTENT: ${params?.intent_canonical || params?.intent || 'generic'}\nUI CONTEXT: ${params?.uiContext || 'button'}`;
+  }
+
   let contextFormat = '';
   if (type === 'internal_comms') {
-    contextFormat = `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang. DO NOT include the title as a header - start directly with the message content.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`;
+    contextFormat = `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang. DO NOT include the title as a header - start directly with the message content.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- CRITICAL: Maintain focus on the specific update details from title and key update\n- Do NOT drift into generic corporate messaging or company boilerplate\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`;
   } else if (type === 'press_release') {
     contextFormat = `\nTYPE: Press Release\nFORMAT RULES:\n- CRITICAL: Maintain the specific content from HEADLINE and KEY MESSAGE\n- Do NOT drift away from the original announcement details\n- Keep factual tone, avoid generic insurance marketing language\n- Ensure the response directly addresses the specific news being announced`;
   } else if (type === 'microcopy') {
     const uiContext = params?.uiContext || 'button';
     if (uiContext === 'error') {
-      contextFormat = `\nUI CONTEXT: Error message\nFORMAT RULES:\n- Short (1 sentence max), empathetic, helpful, suggestive\n- Be understanding and offer a solution or next step\n- Avoid technical jargon, keep it user-friendly`;
+      contextFormat = `\nUI CONTEXT: Error message\nFORMAT RULES:\n- Short (1 sentence max), empathetic, helpful, suggestive\n- Be understanding and offer a solution or next step\n- Avoid technical jargon, keep it user-friendly\n- CRITICAL: Address the specific error context - do not provide generic error messages`;
     } else if (uiContext === 'button') {
-      contextFormat = `\nUI CONTEXT: Button\nFORMAT RULES:\n- Short (≤ 5 words), direct, simple, action-first\n- Prefer "Next" over "Next step", "Continue" over "Continue to next page"\n- No unnecessary words or qualifiers`;
+      contextFormat = `\nUI CONTEXT: Button\nFORMAT RULES:\n- Short (≤ 5 words), direct, simple, action-first\n- Prefer "Next" over "Next step", "Continue" over "Continue to next page"\n- No unnecessary words or qualifiers\n- CRITICAL: The button text must clearly indicate the specific action for the INTENT`;
     } else if (uiContext === 'tooltip') {
-      contextFormat = `\nUI CONTEXT: Tooltip\nFORMAT RULES:\n- Concise (1 sentence max), helpful, contextual\n- Focus on the specific INTENT/question - answer it directly\n- Avoid marketing language or promotional content\n- Be informative but brief - tooltips should be quick to read`;
+      contextFormat = `\nUI CONTEXT: Tooltip\nFORMAT RULES:\n- Concise (1 sentence max), helpful, contextual\n- Focus on the specific INTENT/question - answer it directly\n- Avoid marketing language or promotional content\n- Be informative but brief - tooltips should be quick to read\n- CRITICAL: Maintain focus on the specific INTENT - do not drift into generic advice`;
     }
   }
 
   const task =
-`TASK: Revise the text to improve TRS.
-TYPE: ${type}${contextFormat}
+`TASK: Revise the text to improve TRS while maintaining relevance to the original request.
+TYPE: ${type}${contextFormat}${originalContext}
 ${localeLine}
-INPUT TEXT:
+
+CURRENT TEXT TO IMPROVE:
 """
 ${base}
 """
+
 FIXES TO APPLY:
 ${fixLines || '  - Keep voice and constraints; remove any scaffolding/preface.'}
+
+CRITICAL INSTRUCTIONS:
+- IMPROVE the existing text based on the TRS feedback
+- Do NOT change the topic or subject matter
+- Maintain relevance to the original request (see above)
+- Keep the same core message but fix the specific issues identified
+- Do NOT generate completely new content
+- Do NOT generate content for multiple channels
+
 ${refsBlock(refs)}
 OUTPUT: Only the final text (no preface, no labels, no fences).`;
 

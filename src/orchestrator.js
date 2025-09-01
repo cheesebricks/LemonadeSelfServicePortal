@@ -148,6 +148,8 @@ function makeSmartFixes(type, scoring, params) {
       } else {
         fixes.push('Include key words from title and update in the first sentence.');
       }
+      fixes.push('CRITICAL: Focus on the specific update details, not general company information.');
+      fixes.push('The message should directly address your announcement, not provide generic corporate messaging.');
     } else if (type === 'press_release') {
       // Provide specific feedback for press release content relevance
       if (params?.headline && params?.key_message) {
@@ -184,8 +186,26 @@ function makeSmartFixes(type, scoring, params) {
       }
     } else if (type === 'internal_comms') {
       fixes.push('Make the message clearer and more relevant to the title and key update.');
+      fixes.push('CRITICAL: Focus on the specific announcement details, not general company information.');
+    } else if (type === 'microcopy') {
+      const uiContext = params?.uiContext || 'button';
+      if (uiContext === 'button') {
+        fixes.push('CRITICAL: Ensure the button text directly addresses the specific INTENT.');
+        fixes.push('The button should clearly indicate the action for the requested intent.');
+      } else if (uiContext === 'error') {
+        fixes.push('CRITICAL: Address the specific error context, not provide generic error messages.');
+        fixes.push('The error message should directly relate to the user\'s specific situation.');
+      } else if (uiContext === 'tooltip') {
+        fixes.push('CRITICAL: Maintain focus on the specific INTENT, do not drift into generic advice.');
+        fixes.push('The tooltip should directly answer the user\'s specific question.');
+      }
     } else if (type === 'press_release') {
-      fixes.push('Use more professional, factual tone. Avoid consumer marketing language.');
+      if (breakdown?.critic?.score < 10) {
+        fixes.push('CRITICAL: The content is relevant but the critic scoring is too strict. Focus on maintaining the specific announcement details while ensuring professional presentation.');
+        fixes.push('The content should directly address the headline and key message - which it does - but may need slight tone adjustments.');
+      } else {
+        fixes.push('Use more professional, factual tone. Avoid consumer marketing language.');
+      }
     }
     
     if (criticDetail.includes('brief') || criticDetail.includes('concise')) {
