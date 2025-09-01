@@ -332,14 +332,14 @@ export async function runPipeline({ type, params, onLog }) {
 
     const attempts = [attemptMeta('initial', sBest, g1.latency_ms)];
 
-    if (sBest.verdict !== 'fail') {
+    if (sBest.verdict === 'pass') {
       const duration_ms = Date.now() - startedAt;
       push(`🏁 Finished in ${duration_ms}ms (${String(sBest.verdict).toUpperCase()}).`);
       return { ok: true, log, policy, result: tBest, scoring: sBest, attempts, duration_ms };
     }
 
-    // 4) Iterative TRS-driven revise loop
-    for (let i = 2; i <= MAX_TRIES && sBest.verdict === 'fail'; i++) {
+    // 4) Iterative TRS-driven revise loop (for FAIL and BORDERLINE)
+    for (let i = 2; i <= MAX_TRIES && (sBest.verdict === 'fail' || sBest.verdict === 'borderline'); i++) {
       const fixes = makeRuleFixes(type, sBest.rules);
 
       const tplR = genTemplate_revise({
@@ -387,7 +387,7 @@ export async function runPipeline({ type, params, onLog }) {
       attempts.push(attemptMeta(`revise#${i - 1}`, sR, gR.latency_ms));
 
       if (sR.trs >= sBest.trs) { tBest = tR; sBest = sR; }
-      if (sBest.verdict !== 'fail') break;
+      if (sBest.verdict === 'pass') break;
     }
 
     const duration_ms = Date.now() - startedAt;

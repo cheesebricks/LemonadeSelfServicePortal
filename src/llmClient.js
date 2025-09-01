@@ -3,7 +3,7 @@
 // Returns: { ok, text, latency_ms, error }
 
 const DEFAULT_BASE = 'https://lemonade-portal-api.selfportal.workers.dev';
-const DEFAULT_MODEL = 'llama3-8b-8192';
+const DEFAULT_MODEL = 'llama-3.1-8b-instant';
 
 // --- URL helpers ---
 function getParam(name) {
