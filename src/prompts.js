@@ -110,7 +110,10 @@ KEY MESSAGE: ${params?.key_message || ''}
 ${refsBlock(refs)}
 REQUIREMENTS:
 - Factual tone; avoid consumer CTA language.
-- Include at least 1 keyword from HEADLINE/KEY MESSAGE.
+- CRITICAL: You MUST include the specific content from HEADLINE and KEY MESSAGE in your response.
+- The response should directly address and incorporate the headline and key message details.
+- Do NOT generate generic insurance content - focus on the specific announcement.
+- Include at least 2-3 keywords from HEADLINE/KEY MESSAGE in the first sentence.
 ${noPrefaceGuards('')}
 OUTPUT: Only the final text.`;
     return { system: sys, user: task };
@@ -128,6 +131,8 @@ export function genTemplate_revise({ type, traits, params, refs, preferred, bann
   let contextFormat = '';
   if (type === 'internal_comms') {
     contextFormat = `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang. DO NOT include the title as a header - start directly with the message content.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`;
+  } else if (type === 'press_release') {
+    contextFormat = `\nTYPE: Press Release\nFORMAT RULES:\n- CRITICAL: Maintain the specific content from HEADLINE and KEY MESSAGE\n- Do NOT drift away from the original announcement details\n- Keep factual tone, avoid generic insurance marketing language\n- Ensure the response directly addresses the specific news being announced`;
   } else if (type === 'microcopy') {
     const uiContext = params?.uiContext || 'button';
     if (uiContext === 'error') {

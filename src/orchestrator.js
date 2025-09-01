@@ -149,7 +149,18 @@ function makeSmartFixes(type, scoring, params) {
         fixes.push('Include key words from title and update in the first sentence.');
       }
     } else if (type === 'press_release') {
-      fixes.push('Include headline and key message keywords in the text.');
+      // Provide specific feedback for press release content relevance
+      if (params?.headline && params?.key_message) {
+        const headlineWords = (params.headline || '').split(/\s+/).filter(w => w.length >= 2);
+        const messageWords = (params.key_message || '').split(/\s+/).filter(w => w.length >= 2);
+        const keyTerms = [...headlineWords, ...messageWords].slice(0, 5);
+        
+        fixes.push(`CRITICAL: Include these specific terms from your announcement: ${keyTerms.join(', ')}`);
+        fixes.push('Do NOT generate generic insurance content - focus on the specific news being announced');
+        fixes.push('The response should directly address the headline and key message, not generic company benefits');
+      } else {
+        fixes.push('Include headline and key message keywords in the text.');
+      }
     }
   }
   

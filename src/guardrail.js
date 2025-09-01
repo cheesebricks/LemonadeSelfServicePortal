@@ -127,7 +127,13 @@ function rulesScore(text, contentType, inputs, policy) {
     const kws = uniqKeywords(`${inputs?.headline || ""} ${inputs?.key_message || ""}`, 8);
     const matchResult = enhancedKeywordMatch(t, kws, inputs);
     
-    if (matchResult.hits < 1) s -= 10;
+    // Stricter keyword requirements for press releases
+    if (matchResult.hits < 2) s -= 15; // Require at least 2 keywords, bigger penalty
+    if (matchResult.hits < 1) s -= 25; // Severe penalty for no keywords
+    
+    // Store semantic matches for better feedback
+    if (inputs) inputs._semanticMatches = matchResult.semanticMatches;
+    
     if (/(sign up|join us|try now|buy now)/i.test(t)) s -= 6;
   }
 
@@ -189,6 +195,8 @@ async function criticScore(text, contentType, params = {}) {
     }
   } else if (contentType === "internal_comms") {
     rubric = `Evaluate clarity, first-sentence relevance to title+key update, professional tone, and absence of marketing fluff.`;
+  } else if (contentType === "press_release") {
+    rubric = `CRITICAL: Evaluate content relevance to the specific announcement. The text MUST directly address the headline and key message details. Score 0-10 if the content is generic insurance marketing with no connection to the specific news. Score 30-40 only if it directly incorporates the headline and key message content. Be very strict about relevance.`;
   } else {
     rubric = `Evaluate factual tone, presence of headline/key-message keywords, no CTA, professional style.`;
   }
