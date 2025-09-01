@@ -98,15 +98,56 @@ export function enforceOutputShape(type, text, params = {}) {
     return t;
   }
 
-  if (type === 'internal_comms' || type === 'press_release') {
+  if (type === 'internal_comms') {
     // Remove leading labels again (aggressive)
-    t = t.replace(/^(?:here\s+is|here’s|here is|below is|internal comms announcement|press release|final text|updated copy|answer|response)\b[^:\n]*:\s*/i, '').trim();
+    t = t.replace(/^(?:here\s+is|here's|here is|below is|internal comms announcement|press release|final text|updated copy|answer|response)\b[^:\n]*:\s*/i, '').trim();
 
-    // Remove meta “Output:” / “Task:” / “Draft:” lines if present
+    // Remove meta "Output:" / "Task:" / "Draft:" lines if present
     t = t.replace(/^(?:output|task|draft|final)\s*:\s*/i, '').trim();
 
     // If model wrapped the whole text in quotes, unwrap
-    t = t.replace(/^["'“”‘’]+|["'“”‘’]+$/g, '').trim();
+    t = t.replace(/^["'""'']+|["'""'']+$/g, '').trim();
+
+    // Channel-specific formatting cleanup
+    const channel = params?.channel || 'Slack';
+    if (channel.toLowerCase() === 'slack') {
+      // For Slack: Remove any title/header that appears at the beginning
+      const title = params?.title || '';
+      if (title) {
+        // Remove title if it appears at the start (case-insensitive, allow some variation)
+        const titlePattern = new RegExp('^\\s*' + escapeRegex(title) + '\\s*\\n\\s*', 'i');
+        t = t.replace(titlePattern, '');
+        
+        // Also handle cases where LLM added formatting like "Subject: title" or "Title: title"
+        t = t.replace(/^(?:subject|title|topic|re):\s*[^\n]*\n\s*/i, '');
+      }
+      
+      // Remove any standalone title lines that match the title parameter
+      if (title) {
+        const lines = t.split('\n');
+        const filteredLines = lines.filter(line => {
+          const cleanLine = line.trim().toLowerCase();
+          const cleanTitle = title.toLowerCase();
+          return !(cleanLine === cleanTitle || cleanLine === cleanTitle + ':' || cleanLine === cleanTitle + '.');
+        });
+        t = filteredLines.join('\n').trim();
+      }
+    }
+    // For Email: Keep the title format as intended
+
+    // Never return empty
+    return t || text || '';
+  }
+
+  if (type === 'press_release') {
+    // Remove leading labels again (aggressive)
+    t = t.replace(/^(?:here\s+is|here's|here is|below is|internal comms announcement|press release|final text|updated copy|answer|response)\b[^:\n]*:\s*/i, '').trim();
+
+    // Remove meta "Output:" / "Task:" / "Draft:" lines if present
+    t = t.replace(/^(?:output|task|draft|final)\s*:\s*/i, '').trim();
+
+    // If model wrapped the whole text in quotes, unwrap
+    t = t.replace(/^["'""'']+|["'""'']+$/g, '').trim();
 
     // Never return empty
     return t || text || '';

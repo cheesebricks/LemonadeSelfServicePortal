@@ -90,12 +90,12 @@ KEY UPDATE: ${params?.key_update || ''}
 ${lexiconLines([], params?.banned || [])}
 ${refsBlock(refs)}
 REQUIREMENTS:
-- If CHANNEL is Slack: Keep it to 1–2 short lines; crisp; no emoji or slang.
+- If CHANNEL is Slack: Keep it to 1–2 short lines; crisp; no emoji or slang. DO NOT include the title as a header - start directly with the message content.
 - If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body; professional, friendly.
 - Include at least 2 of: ${keywordList(params?.title, params?.key_update)} in the first sentence/paragraph.
 - Produce exactly ONE message for the specified CHANNEL only — do not include content for any other channel.
 - Do NOT include channel prefixes or labels like "Slack:" or "Email:".
- - Do NOT mention the channel name in the output.
+- Do NOT mention the channel name in the output.
 ${noPrefaceGuards('')}
 OUTPUT: Only the final text.`;
     return { system: sys, user: task };
@@ -127,7 +127,7 @@ export function genTemplate_revise({ type, traits, params, refs, preferred, bann
 
   let contextFormat = '';
   if (type === 'internal_comms') {
-    contextFormat = `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`;
+    contextFormat = `\nCHANNEL: ${params?.channel || 'Slack'}\nFORMAT RULES:\n- If CHANNEL is Slack: Keep to 1–2 short lines; crisp; no emoji or slang. DO NOT include the title as a header - start directly with the message content.\n- If CHANNEL is Email: Start with the TITLE on its own line, then a blank line, then the body.\n- Produce only ONE message for that CHANNEL.\n- Do NOT include channel prefixes like "Slack:" or "Email:".\n- Do NOT mention the channel name in the output.`;
   } else if (type === 'microcopy') {
     const uiContext = params?.uiContext || 'button';
     if (uiContext === 'error') {
